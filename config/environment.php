@@ -1,5 +1,5 @@
 <?php
-	$config = Config::singleton();
+	$config = Config::init();
 
 	//Folders' Direction
 	$config->set('controllersfolder', 'app/controllers/');

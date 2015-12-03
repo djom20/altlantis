@@ -12,7 +12,7 @@
 		{
 			public static function show($name, $_VARS = array())
 			{
-				$config = Config::singleton();
+				$config = Config::init();
 				$path = $config->get('viewsFolder') . $name;
 
 				if (file_exists($path) == false) {

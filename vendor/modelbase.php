@@ -17,9 +17,9 @@
 
 			public function __construct($table)
 			{
-				$this->db       = SPDO::singleton();
+				$this->db       = SPDO::init();
 				$this->table    = htmlentities($table);
-				$this->config   = Config::singleton();
+				$this->config   = Config::init();
 			}
 
 			public function lastID()

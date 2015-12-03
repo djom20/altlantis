@@ -21,7 +21,7 @@
 
 			public function show()
 			{
-				$config = Config::singleton();
+				$config = Config::init();
 				$path = $config->get('viewsfolder') . $this->name;
 
 				if (file_exists($path) == false) {

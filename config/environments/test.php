@@ -1,3 +1,3 @@
 <?php
-	$config = Config::singleton();
+	$config = Config::init();
 	$config->set('urlbase', 'http://test.mylocalhost.com/');

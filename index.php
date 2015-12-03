@@ -1,3 +1,4 @@
 <?php
 	require 'vendor/booth.php';
-	$app = Booth::launch(); // Declare instance
+	$app = Booth::init(); // Declare instance
+	$app->run(); // Init Server

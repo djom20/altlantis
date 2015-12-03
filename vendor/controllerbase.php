@@ -18,12 +18,12 @@
 			protected $put;
 			protected $delete;
 
-			function __construct($post, $get, $files, $put, $delete)
+			public function __construct($post, $get, $files, $put, $delete)
 			{
 				session_set_cookie_params(31536000, '/');
 				session_start();
 
-				$this->config   = Config::singleton();
+				$this->config   = Config::init();
 				$this->get      = $get;
 				$this->put      = $put;
 				$this->post     = $post;
@@ -32,9 +32,9 @@
 				$this->view     = new View();
 			}
 
-			function _Always(){}
+			public function _Always(){}
 
-			function getModel($model)
+			public function getModel($model)
 			{
 				$modelName  = ucwords($model) . 'Model';
 				$strmodel   = strtolower($model);
@@ -43,10 +43,10 @@
 					require $modelPath;
 					$modelObj = new $modelName($strmodel);
 				} else {
-					$db     = SPDO::singleton();
-					$result = $db->query("SHOW TABLES;");
-					$rows   = $result->fetchAll();
-					$sw     = false;
+					$this->db   = SPDO::init();
+					$result 	= $this->db->query("SHOW TABLES;");
+					$rows   	= $result->fetchAll();
+					$sw     	= false;
 
 					foreach ($rows as $row) {
 						if (!$sw) {

@@ -1,4 +1,10 @@
 <?php
+	/**
+	  Index Controller
+	*
+	* @author Ing. Jonathan Olier djom202@gmail.com
+	*
+	*/
 
 	class IndexController extends ControllerBase
 	{

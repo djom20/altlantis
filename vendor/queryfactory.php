@@ -12,7 +12,7 @@
 		{
 			public static function query($query, $values = array())
 			{
-				$db = SPDO::singleton();
+				$db = SPDO::init();
 
 				$result = $db->prepare($query);
 				$result->execute($values);
@@ -22,7 +22,7 @@
 
 			public static function executeOnly($query, $values = array())
 			{
-				$db = SPDO::singleton();
+				$db = SPDO::init();
 
 				$result = $db->prepare($query);
 				$result->execute($values);

@@ -14,11 +14,11 @@
 
 			public function __construct()
 			{
-				$config = Config::singleton();
+				$config = Config::init();
 				parent::__construct($config->get('driver') . ':host=' . $config->get('dbhost') . ';dbname=' . $config->get('dbname'), $config->get('dbuser'), $config->get('dbpass'), array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
 			}
 
-			public static function singleton()
+			public static function init()
 			{
 				if (self::$instance == null) {
 					self::$instance = new self();

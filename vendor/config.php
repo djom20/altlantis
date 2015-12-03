@@ -30,7 +30,7 @@
                 }
             }
 
-            public static function singleton()
+            public static function init()
             {
                 if (!isset(self::$instance)) {
                     $c = __CLASS__;
