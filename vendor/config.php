@@ -40,4 +40,6 @@
                 return self::$instance;
             }
         }
+
+        $config = Config::init();
     }

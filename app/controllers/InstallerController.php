@@ -10,12 +10,12 @@
 	{
 		public function _Always()
 		{
-			$this->config->set('template', 'installer.php');
+			$this->config->set('template', 'installer');
 		}
 
 		public function install()
 		{
-			$params = array();
-			$this->view->show('install/installer.php', $params);
+			$params = array('title' => 'Welcome');
+			$this->view->show('install/installer', $params);
 		}
 	}

@@ -26,13 +26,16 @@
 				return self::$instance;
 			}
 
-			public function validInstall()
+			public function validInstall($config)
 			{
-				$u = $this->config->get('urlbase');
-				if(!empty($u)){
+				$u = $config->get('urlbase');
+				echo $config->get('urlbase'); exit();
+				if(empty($u)){
 					error_log('No existe el parametro de la URL');
 					return false;
 				}
+
+				return true;
 			}
 
 			public static function install(){

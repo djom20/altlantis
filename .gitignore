@@ -1,0 +1,6 @@
+*.sftp
+*.zip
+*.rar
+*.json
+node_modules/
+cache/

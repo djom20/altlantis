@@ -8,9 +8,17 @@
 
 	class IndexController extends ControllerBase
 	{
+		public function _Always()
+		{
+			$this->config->set('template', 'default');
+		}
+
 		public function index()
 		{
-			$params = array('idproduct' => 1, 'product' => 'Arroz', 'exist' => 23, 'color' => 'green');
-			HTTP::JSON(Partial::response(HTTP::Value(200), $params));
+			$params = array(
+				'title' => 'Welcome',
+				'stylesheet' => 'resources/css/stylesheet_home.css'
+			);
+			$this->view->show('home/index');
 		}
 	}

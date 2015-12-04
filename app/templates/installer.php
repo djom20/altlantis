@@ -21,6 +21,9 @@
 
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+	<link rel="stylesheet" href="resources/css/stylesheet_installer.css">
+
 	<style>
 		@import url('http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,700,200italic,400italic,700italic');
 
@@ -57,7 +60,7 @@
 			}
 		}
 	</style>
-	<title>Atlantis | Welcome</title>
+	<title>Atlantis | <?= $_params->title ?></title>
 </head>
 <body>
 	<?php $display->show(); ?>

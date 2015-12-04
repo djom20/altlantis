@@ -26,10 +26,11 @@
 			public static function run()
 			{
 				require 'vendor/config.php';
+				include 'config/environment.php';
 				require 'vendor/installer.php';
 
-				$i = Installer::init();
-				if($i->validInstall()){
+				// $i = Installer::init();
+				// if($i->validInstall($config)){
 					require 'vendor/spdo.php';
 					require 'vendor/controllerbase.php';
 					require 'vendor/modelbase.php';
@@ -42,7 +43,6 @@
 					require 'vendor/minitester.php';
 
 					// Config
-					include 'config/environment.php';
 					include 'config/database.php';
 
 					$env = 'config/environments/'. strtolower($config->get('environment')) . '.php';
@@ -130,10 +130,10 @@
 					//Finalmente creamos una instancia del controlador y llamamos a la accion
 					$controller->_Always();
 					$controller->$actionName();
-				}else{
-					error_log('No se ha realizado el proceso de instalacion manual');
-					self::installer();
-				}
+				// }else{
+					// error_log('No se ha realizado el proceso de instalacion manual');
+					// self::installer();
+				// }
 			}
 
 			public static function installer()

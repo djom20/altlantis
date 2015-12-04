@@ -13,28 +13,45 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-	<style>
-		@import url('http://fonts.googleapis.com/css?family=Lato:700');
+    <!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
-		.background {
-			background: #348cb2 url("https://dl.dropboxusercontent.com/u/57960869/Altiviaot/wallpaper.jpg") bottom left;
-			background-repeat: repeat-x;
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+	<link rel="stylesheet" href="resources/css/stylesheet_installer.css">
+
+	<?php if(!empty($_params->stylesheet) && isset($_params->stylesheet)): ?>
+		<link rel="stylesheet" href="<?= $_params->stylesheet ?>">
+	<?php endif; ?>
+
+	<style>
+		@import url('http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,700,200italic,400italic,700italic');
+
+		body {
+			/*background: #fff url("./resources/img/cloud-bg.png") bottom left;*/
+			background-color: #0079bf;
 			height: 100%;
 			left: 0;
+			font-family: "Source Sans Pro", sans-serif;
 			opacity: 1;
 			position: fixed;
 			top: 0;
 			width: 100%;
 			z-index: -1;
+			color: #fff;
 		}
 
 		.content {
-			margin: 150px 0;
+			margin: 50px 0;
 		}
 
 		h1, h2, h3, h4, h5, h6, p {
-			color: #fff !important;
-			margin-bottom: 0;
+			font-weight: 200;
+			margin: 0;
 		}
 
 		.text-center{
@@ -47,7 +64,7 @@
 			}
 		}
 	</style>
-	<title>ltiviaOT | API</title>
+	<title>Atlantis | <?= $_params->title ?></title>
 </head>
 <body>
 	<?php $display->show(); ?>

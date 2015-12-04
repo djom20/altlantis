@@ -1,0 +1,10 @@
+#installer .header {
+  text-align: center;
+  margin-top: 50px; }
+#installer .installweb {
+  margin: 50px auto 0;
+  width: 40%;
+  color: #000; }
+  #installer .installweb .well {
+    background-color: #fff;
+    background-image: none; }

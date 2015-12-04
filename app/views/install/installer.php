@@ -9,11 +9,3 @@
 		</div>
 	</div>
 </div>
-<style>
-	#installer .installweb {
-		background-color:#fff;
-		background-image: none;
-		width: 40%;
-		color: #000;
-	}
-</style>

@@ -14,7 +14,7 @@
 			{
 				$config     = Config::init();
 				$display    = new Display($name, $_VARS);
-				$path       = $config->get('templatesfolder') . $config->get('template');
+				$path       = $config->get('templatesfolder') . $config->get('template') . '.php';
 
 				if (file_exists($path) == false) {
 					trigger_error('View `' . $path . '` does not exist.', E_USER_NOTICE);
