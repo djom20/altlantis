@@ -14,6 +14,7 @@
 			{
 				$config     = Config::init();
 				$display    = new Display($name, $_VARS);
+				$_params	= $display->getParams();
 				$path       = $config->get('templatesfolder') . $config->get('template') . '.php';
 
 				if (file_exists($path) == false) {

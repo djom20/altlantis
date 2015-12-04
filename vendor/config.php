@@ -1,45 +1,50 @@
 <?php
-    /**
-      Config Class
-    *
-    * @author Ing. Jonathan Olier djom202@gmail.com
-    *
-    */
+	/**
+	  Config Class
+	*
+	* @author Ing. Jonathan Olier djom202@gmail.com
+	*
+	*/
 
-    if(!class_exists('Config'))
-    {
-        class Config
-        {
-            private $vars;
-            private static $instance;
+	if(!class_exists('Config'))
+	{
+		class Config
+		{
+			private $vars;
+			private static $instance;
 
-            private function __construct()
-            {
-                $this->vars = array();
-            }
+			private function __construct()
+			{
+				$this->vars = array();
+			}
 
-            public function set($name, $value)
-            {
-                $this->vars[$name] = $value;
-            }
+			public function set($name, $value)
+			{
+				$this->vars[$name] = $value;
+			}
 
-            public function get($name)
-            {
-                if (isset($this->vars[$name])) {
-                    return $this->vars[$name];
-                }
-            }
+			public function setArray($arr = array())
+			{
+				$this->vars = array_merge($this->vars, $arr);
+			}
 
-            public static function init()
-            {
-                if (!isset(self::$instance)) {
-                    $c = __CLASS__;
-                    self::$instance = new $c;
-                }
+			public function get($name)
+			{
+				if (isset($this->vars[$name])) {
+					return $this->vars[$name];
+				}
+			}
 
-                return self::$instance;
-            }
-        }
+			public static function init()
+			{
+				if (!isset(self::$instance)) {
+					$c = __CLASS__;
+					self::$instance = new $c;
+				}
 
-        $config = Config::init();
-    }
+				return self::$instance;
+			}
+		}
+
+		$config = Config::init();
+	}

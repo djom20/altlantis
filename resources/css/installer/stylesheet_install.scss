@@ -1,0 +1,44 @@
+@import url('http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,700,200italic,400italic,700italic');
+
+body {
+	background-color: #0079bf;
+	height: 100%;
+	left: 0;
+	font-family: "Source Sans Pro", sans-serif;
+	opacity: 1;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: -1;
+	color: #fff;
+}
+
+#installer {
+	.header {
+		text-align: center;
+		margin-top: 50px;
+		h1, h2, h3, h4, h5, h6, p {
+			font-weight: 200;
+			margin: 0;
+		}
+		small{}
+	}
+	.installweb {
+		&.content {
+			margin: 50px 0;
+		}
+		margin: 50px auto 0;
+		width: 40%;
+		color: #000;
+		.well {
+			background-color:#fff;
+			background-image: none;
+		}
+	}
+}
+
+@media (max-width: 450px) {
+	.content {
+		margin: 40px 0;
+	}
+}

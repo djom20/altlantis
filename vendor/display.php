@@ -19,6 +19,10 @@
 				$this->_VARS = (object)$_VARS;
 			}
 
+			public function getParams(){
+				return $this->_VARS;
+			}
+
 			public function show()
 			{
 				$config = Config::init();
@@ -29,7 +33,6 @@
 					return false;
 				}
 
-				$_params = $this->_VARS;
 				include($path);
 			}
 		}

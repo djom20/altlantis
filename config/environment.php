@@ -1,8 +1,16 @@
 <?php
-	//Folders' Direction
-	$config->set('controllersfolder', 'app/controllers/');
-	$config->set('modelsfolder', 'app/models/');
-	$config->set('viewsfolder', 'app/views/');
-	$config->set('templatesfolder', 'app/templates/');
-	$config->set('template', 'default');
-	$config->set('environment', 'development');
+	// Configurations generals
+	$config->setArray(array(
+		'controllersfolder' => 'app/controllers/',
+		'modelsfolder' 		=> 'app/models/',
+		'viewsfolder' 		=> 'app/views/',
+		'templatesfolder' 	=> 'app/templates/',
+		'loggerfolder' 		=> 'storage/logs/',
+		'template' 			=> 'default',
+		'environment' 		=> 'development',
+		'debug' 			=> true,
+		'url' 				=> 'http://localhost',
+		'timezone' 			=> 'UTC',
+		'locale' 			=> 'en',
+		'key' 				=>'COkfyMY9Ze6tPV4AhXS7vE5xpUeUDKnk'
+	));

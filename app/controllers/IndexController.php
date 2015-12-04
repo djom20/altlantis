@@ -8,17 +8,13 @@
 
 	class IndexController extends ControllerBase
 	{
-		public function _Always()
-		{
-			$this->config->set('template', 'default');
-		}
-
 		public function index()
 		{
-			$params = array(
-				'title' => 'Welcome',
-				'stylesheet' => 'resources/css/stylesheet_home.css'
+			$_params = array(
+				'title' 	 => 'Welcome',
+				'stylesheet' => 'resources/css/home/stylesheet_home.css'
 			);
-			$this->view->show('home/index');
+
+			$this->view->show('home/index', $_params);
 		}
 	}

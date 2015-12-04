@@ -26,7 +26,9 @@
 			public static function run()
 			{
 				require 'vendor/config.php';
+				// Config
 				include 'config/environment.php';
+				include 'config/database.php';
 				require 'vendor/installer.php';
 
 				// $i = Installer::init();
@@ -42,8 +44,6 @@
 					require 'vendor/http.php';
 					require 'vendor/minitester.php';
 
-					// Config
-					include 'config/database.php';
 
 					$env = 'config/environments/'. strtolower($config->get('environment')) . '.php';
 					if(!empty($env) && file_exists($env)){

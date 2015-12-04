@@ -22,48 +22,9 @@
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
-	<link rel="stylesheet" href="resources/css/stylesheet_installer.css">
-
-	<?php if(!empty($_params->stylesheet) && isset($_params->stylesheet)): ?>
+	<?php //if(!empty($_params->stylesheet) && isset($_params->stylesheet)): ?>
 		<link rel="stylesheet" href="<?= $_params->stylesheet ?>">
-	<?php endif; ?>
-
-	<style>
-		@import url('http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,700,200italic,400italic,700italic');
-
-		body {
-			/*background: #fff url("./resources/img/cloud-bg.png") bottom left;*/
-			background-color: #0079bf;
-			height: 100%;
-			left: 0;
-			font-family: "Source Sans Pro", sans-serif;
-			opacity: 1;
-			position: fixed;
-			top: 0;
-			width: 100%;
-			z-index: -1;
-			color: #fff;
-		}
-
-		.content {
-			margin: 50px 0;
-		}
-
-		h1, h2, h3, h4, h5, h6, p {
-			font-weight: 200;
-			margin: 0;
-		}
-
-		.text-center{
-			text-align: center;
-		}
-
-		@media (max-width: 450px) {
-			.content {
-				margin: 40px 0;
-			}
-		}
-	</style>
+	<?php //endif; ?>
 	<title>Atlantis | <?= $_params->title ?></title>
 </head>
 <body>

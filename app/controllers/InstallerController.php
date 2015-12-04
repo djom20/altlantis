@@ -8,14 +8,13 @@
 
 	class InstallerController extends ControllerBase
 	{
-		public function _Always()
-		{
-			$this->config->set('template', 'installer');
-		}
-
 		public function install()
 		{
-			$params = array('title' => 'Welcome');
+			$params = array(
+				'title' => 'Welcome',
+				'stylesheet' => 'resources/css/installer/stylesheet_install.css'
+			);
+
 			$this->view->show('install/installer', $params);
 		}
 	}
