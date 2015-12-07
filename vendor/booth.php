@@ -26,10 +26,7 @@
 			public static function run()
 			{
 				require 'vendor/config.php';
-				// Config
-				include 'config/environment.php';
-				include 'config/database.php';
-				require 'vendor/installer.php';
+				// require 'vendor/installer.php';
 
 				// $i = Installer::init();
 				// if($i->validInstall($config)){
@@ -43,11 +40,21 @@
 					require 'vendor/rowobject.php';
 					require 'vendor/http.php';
 					require 'vendor/minitester.php';
+					require 'vendor/migration.php';
 
+					$confs_gen = include 'config/environment.php';
+					if(!empty($confs_gen) && is_array($confs_gen)){
+						$config->setArray($confs_gen);
+					}
 
-					$env = 'config/environments/'. strtolower($config->get('environment')) . '.php';
-					if(!empty($env) && file_exists($env)){
-						(require $env) or die('Error al iniciar el ambiente de trabajo');
+					$db 	= require 'config/database.php';
+					if(!empty($db) && is_array($db)){
+						$config->setArray($db[strtolower($config->get('environment'))]);
+					}
+
+					$env 	= require 'config/environments/'. strtolower($config->get('environment')) . '.php';
+					if(!empty($env) && is_array($env)){
+						$config->setArray($env);
 					}
 
 					//Formamos el nombre del Controlador o en su defecto, tomamos que es el IndexController

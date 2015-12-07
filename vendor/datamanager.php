@@ -8,7 +8,7 @@
 
 	if(!class_exists('DataManager'))
 	{
-		abstract class DataManager
+		class DataManager
 		{
 			public function __construct(){}
 

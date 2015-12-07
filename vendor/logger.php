@@ -8,21 +8,24 @@
 
 	if(!class_exists('Logger'))
 	{
-		abstract class Logger
+		class Logger
 		{
-			public function __construct(){}
-
-			public function _Always(){}
+			protected $logFile;
 
 			public function log($msj)
 			{
-				$logFile = 'log-'.php_sapi_name().'.txt';
-				sefl::writte($config->get('loggerfolder').$logFile, $msj);
+				$this->logFile = $config->get('loggerfolder').'server-'.php_sapi_name().'.log';
+				sefl::writte($this->logFile, $msj);
 			}
 
 			private function write($url, $msj)
 			{
-				//Escibir en el log del dia
+				error_log($msj, 3, $url);
+			}
+
+			public function showMe()
+			{
+				echo nl2br(file_get_contents($nombre_archivo));
 			}
 		}
 	}

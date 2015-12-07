@@ -8,18 +8,24 @@
 
 	if(!class_exists('ModelBase'))
 	{
-		class ModelBase
+		abstract class ModelBase
 		{
 			protected $db;
 			protected $table;
 			protected $config;
-			protected  $models = array ();
 
 			public function __construct($table)
 			{
 				$this->db       = SPDO::init();
 				$this->table    = htmlentities($table);
-				$this->config   = Config::init();
+			}
+
+			public static function getKey()
+			{
+				// $result = $this->db->prepare('SELECT id{$table} FROM {$table} WHERE {$field} = {$id};');
+				// $result->execute($values);
+
+				// return $result->fetchAll();
 			}
 
 			public function lastID()
@@ -27,7 +33,7 @@
 				return $this->db->lastInsertId();
 			}
 
-			public function query($query, $values = array())
+			public static function query($query, $values = array())
 			{
 				$result = $this->db->prepare($query);
 				$result->execute($values);

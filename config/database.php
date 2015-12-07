@@ -11,7 +11,7 @@
 			'schema'   => 'public'
 		),
 		'test' 		   => array(
-			'driver'   => 'mysql',
+			'driver'   => 'postgresql',
 			'host'     => 'localhost',
 			'database' => 'database',
 			'username' => 'root',
@@ -21,7 +21,7 @@
 			'schema'   => 'public'
 		),
 		'production'   => array(
-			'driver'   => 'mysql',
+			'driver'   => 'oracle',
 			'host'     => 'localhost',
 			'database' => 'database',
 			'username' => 'root',
@@ -29,5 +29,5 @@
 			'charset'  => 'utf8',
 			'prefix'   => '',
 			'schema'   => 'public'
-		);
+		)
 	);

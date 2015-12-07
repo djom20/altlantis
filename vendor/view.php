@@ -24,5 +24,9 @@
 
 				include($path);
 			}
+
+			public function make($__view){
+				echo $__view;
+			}
 		}
 	}

@@ -1,6 +1,6 @@
 <?php
 	// Configurations generals
-	$config->setArray(array(
+	return array(
 		'controllersfolder' => 'app/controllers/',
 		'modelsfolder' 		=> 'app/models/',
 		'viewsfolder' 		=> 'app/views/',
@@ -13,4 +13,4 @@
 		'timezone' 			=> 'UTC',
 		'locale' 			=> 'en',
 		'key' 				=>'COkfyMY9Ze6tPV4AhXS7vE5xpUeUDKnk'
-	));
+	);

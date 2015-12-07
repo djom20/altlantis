@@ -1,2 +1,2 @@
 <?php
-	$config->set('urlbase', 'http://mylocalhost.com/');
+	return array('urlbase', 'http://mylocalhost.com/');
