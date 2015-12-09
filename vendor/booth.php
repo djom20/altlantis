@@ -40,6 +40,8 @@
 					require 'vendor/rowobject.php';
 					require 'vendor/http.php';
 					require 'vendor/minitester.php';
+					require 'vendor/builder.php';
+					require 'vendor/schema.php';
 					require 'vendor/migration.php';
 
 					$confs_gen = include 'config/environment.php';

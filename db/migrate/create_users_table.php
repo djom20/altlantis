@@ -8,12 +8,11 @@
 		*/
 		public function up()
 		{
-			echo 'Up Table';
-			// Schema::create('users', function (Blueprint $table) {
-			// 	$table->increments('id');
-			// 	$table->string('name');
-			// 	$table->timestamps();
-			// });
+			Schema::create('users', function ($table) {
+				$table->increments('id');
+				$table->string('name')->nullable();
+				$table->timestamps();
+			});
 		}
 
 		/**
@@ -23,7 +22,6 @@
 		*/
 		public function down()
 		{
-			echo 'Down Table';
-			// Schema::drop('users');
+			Schema::drop('users');
 		}
 	}
