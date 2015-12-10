@@ -1,15 +1,15 @@
 <?php
 
 	/**
-	  Migration Class
+	  Migrator Class
 	*
 	* @author Ing. Jonathan Olier djom202@gmail.com
 	*
 	*/
 
-	if(!class_exists('Migration'))
+	if(!class_exists('Migrator'))
 	{
-		abstract class Migration
+		abstract class Migrator
 		{
 			private function __construct()
 			{

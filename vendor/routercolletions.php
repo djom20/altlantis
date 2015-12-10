@@ -229,4 +229,5 @@
             {
                 $this->resources[] = $resource;
             }
+        }
     }

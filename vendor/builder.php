@@ -174,7 +174,7 @@
 
 			public function index($column)
 			{
-				return $this->addSQL("ALTER TABLE {{ $this->table }} DROP INDEX ({{ $column }});");
+				return $this->addSQL("ALTER TABLE {{ $this->table }} ADD INDEX ({{ $column }});");
 			}
 
 			public function indexDrop($column)
@@ -189,12 +189,14 @@
 
 			public function tableExists($table)
 			{
-				return true;
+				$r = $this->conn->query("DESC {{ $table }};");
+				return $r->fetchAll() > 0;
 			}
 
 			public function columnExists($table, $column)
 			{
-				return true;
+				$r = $this->conn->query("SELECT {{ $column }} FROM {{ $table }};");
+				return $r->fetchAll() > 0;
 			}
 
 			public function build(){

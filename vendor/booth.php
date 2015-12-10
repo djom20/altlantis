@@ -25,36 +25,27 @@
 
 			public static function run()
 			{
-				require 'vendor/config.php';
 				// require 'vendor/installer.php';
 
 				// $i = Installer::init();
 				// if($i->validInstall($config)){
-					require 'vendor/spdo.php';
-					require 'vendor/controllerbase.php';
-					require 'vendor/modelbase.php';
-					require 'vendor/view.php';
-					require 'vendor/display.php';
-					require 'vendor/partial.php';
-					require 'vendor/queryfactory.php';
-					require 'vendor/rowobject.php';
-					require 'vendor/http.php';
-					require 'vendor/minitester.php';
-					require 'vendor/builder.php';
-					require 'vendor/schema.php';
-					require 'vendor/migration.php';
+					require_once 'vendor/config.php';
+					require_once 'vendor/files.php';
+
+					// Incluyendo Vendors
+					Files::requireOnce('vendor');
 
 					$confs_gen = include 'config/environment.php';
 					if(!empty($confs_gen) && is_array($confs_gen)){
 						$config->setArray($confs_gen);
 					}
 
-					$db 	= require 'config/database.php';
+					$db 	= require_once 'config/database.php';
 					if(!empty($db) && is_array($db)){
 						$config->setArray($db[strtolower($config->get('environment'))]);
 					}
 
-					$env 	= require 'config/environments/'. strtolower($config->get('environment')) . '.php';
+					$env 	= require_once 'config/environments/'. strtolower($config->get('environment')) . '.php';
 					if(!empty($env) && is_array($env)){
 						$config->setArray($env);
 					}
