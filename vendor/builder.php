@@ -34,10 +34,10 @@
 				return $this->addSQL("CREATE TABLE {{ $tableName }} ( id{{ $tableName }} INT NOT NULL PRIMARY KEY AUTO_INCREMENT); ");
 			}
 
-			public function createTable($tableName)
+			public function createTable()
 			{
 				// Creando la tabla
-				return $this->_addTable($tableName);
+				return $this->_addTable($this->table);
 			}
 
 			public function getTable($tableName)
@@ -102,7 +102,7 @@
 
 			public function boolean($column)
 			{
-				return $this->addSQL("ALTER TABLE {{ $this->table }} ADD {{ $column }} boolean; ");
+				return self::addSQL("ALTER TABLE {{ $this->table }} ADD {{ $column }} boolean; ");
 			}
 
 			public function enum($column)
@@ -125,9 +125,15 @@
 				return $this->addSQL("ALTER TABLE {{ $this->table }} ADD {{ $column }} time; ");
 			}
 
-			public function timestamps($column)
+			public function timestamp($column)
 			{
 				return $this->addSQL("ALTER TABLE {{ $this->table }} ADD {{ $column }} timestamp; ");
+			}
+
+			public function timestamps()
+			{
+				$this->addSQL("ALTER TABLE {{ $this->table }} ADD created_at timestamp; ");
+				return $this->addSQL("ALTER TABLE {{ $this->table }} ADD updated_at timestamp; ");
 			}
 
 			public function foreign($column)

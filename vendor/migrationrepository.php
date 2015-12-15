@@ -28,7 +28,6 @@
 				$this->table 	= htmlentities($table);
 				$this->config   = Config::init();
 				$this->conn 	= $conn;
-				$this->model 	= $this->table();
 			}
 
 			/**
@@ -38,7 +37,13 @@
 			 */
 			public function getRan()
 			{
-				return $this->model->select();
+				$a = array();
+				$r = Partial::arrayNames($this->table()->select());
+				foreach ($r as $key => $value) {
+					$a[] = $value['migration'];
+				}
+
+				return $a;
 			}
 
 			/**
@@ -61,7 +66,7 @@
 			 */
 			public function log($file, $batch)
 			{
-				$record = array('migration' => $file, 'batch' => $batch);
+				$record = Partial::prefix(array('migration' => $file, 'batch' => $batch), ':');
 				$this->table()->insert($record);
 			}
 
@@ -93,7 +98,7 @@
 			 */
 			public function getLastBatchNumber()
 			{
-				$r = $this->model->max('batch');
+				$r = $this->table()->max('batch');
 				return (int) $r[0]['max'];
 			}
 
@@ -153,7 +158,7 @@
 					if ($sw) {
 						$modelObj = new ModelBase($strmodel);
 					} else {
-						die("<h1>404: No se pudo encontrar {$modelName}.</h1>");
+						die("<p><b>".str_replace(__DIR__.'/', '', __FILE__)."</b> at function <b>".__FUNCTION__."</b> line <b>".__LINE__."</b>: No se pudo encontrar {$modelName}.</p>");
 					}
 				}
 

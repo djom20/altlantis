@@ -94,26 +94,26 @@
 			 */
 			protected function runDown($migration, $pretend)
 			{
-				$file = $migration->migration;
+				// $file = $migration->migration;
 
 				// First we will get the file name of the migration so we can resolve out an
 				// instance of the migration. Once we get an instance we can either run a
 				// pretend execution of the migration or we can run the real migration.
-				$instance = $this->resolve($file);
+				// $instance = $this->resolve($file);
 
-				if ($pretend)
-				{
-					return $this->pretendToRun($instance, 'down');
-				}
+				// if ($pretend)
+				// {
+					// return $this->pretendToRun($instance, 'down');
+				// }
 
-				$instance->down();
+				// $instance->down();
 
 				// Once we have successfully run the migration "down" we will remove it from
 				// the migration repository so it will be considered to have not been run
 				// by the application then will be able to fire by any later operation.
-				$this->repository->delete($migration);
+				// $this->repository->delete($migration);
 
-				$this->note("<info>Rolled back:</info> $file");
+				// $this->note("<info>Rolled back:</info> $file");
 			}
 
 			/**
@@ -247,7 +247,7 @@
 				// First we will resolve a "real" instance of the migration class from this
 				// migration file name. Once we have the instances we can run the actual
 				// command such as "up" or "down", or we can just simulate the action.
-				$migration = $this->resolve($file); exit();
+				$migration = $this->resolve($file);
 
 				// if ($pretend)
 				// {
