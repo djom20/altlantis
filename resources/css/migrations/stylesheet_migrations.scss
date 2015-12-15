@@ -1,0 +1,29 @@
+@import url('http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,700,200italic,400italic,700italic');
+body {
+    background-color: #0079bf;
+    height: 100%;
+    left: 0;
+    font-family: "Source Sans Pro", sans-serif;
+    opacity: 1;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: -1;
+    color: #fff;
+}
+
+#migrations {
+    h1 {
+        margin-bottom: 30px;
+    }
+    .listMigrations {
+        info {
+            color: #000;
+            display: block;
+            padding: 5px;
+        }
+        info:nth-child(even) {
+            background-color: #fff;
+        }
+    }
+}

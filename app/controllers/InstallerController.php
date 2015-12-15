@@ -1,6 +1,6 @@
 <?php
 	/**
-	  InstallerController Controller
+	  Installer Controller
 	*
 	* @author Ing. Jonathan Olier djom202@gmail.com
 	*

@@ -12,9 +12,9 @@
 		{
 			public static function query($query, $values = array())
 			{
-				$db = SPDO::init();
+				$conn = SPDO::init();
 
-				$result = $db->prepare($query);
+				$result = $conn->prepare($query);
 				$result->execute($values);
 
 				return $result->fetchAll();
@@ -22,9 +22,9 @@
 
 			public static function executeOnly($query, $values = array())
 			{
-				$db = SPDO::init();
+				$conn = SPDO::init();
 
-				$result = $db->prepare($query);
+				$result = $conn->prepare($query);
 				$result->execute($values);
 
 				return $result->rowCount();

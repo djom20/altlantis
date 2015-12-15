@@ -1,5 +1,5 @@
 <?php
-	class CreateUsersTable extends Migration
+	class CreateUsersTable extends Migrator
 	{
 		/**
 		* Run the migrations.

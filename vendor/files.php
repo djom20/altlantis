@@ -15,19 +15,10 @@
 
 			public static function requireOnce($route)
 			{
-				$array = array();
-				$d = dir($route);
-				while (false !== ($entry = $d->read())){
-					$ext = end(explode(".", $entry));
-					if($ext == 'php' && $entry != 'config.php'){
-						$entry = $route.'/'.$entry;
-						if(!is_dir($entry)) {
-							require_once($entry);
-						}
-					}
+				$files = glob( $route . '/*.php' );
+				foreach ( $files as $file ){
+					require_once( $file );
 				}
-
-				$d->close();
 			}
 		}
 	}

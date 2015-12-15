@@ -1,6 +1,7 @@
-*.sftp
 *.zip
-*.rar
-*.json
-node_modules/
 cache/
+*.sftp
+node_modules/
+*.json
+*.rar
+config/database.php

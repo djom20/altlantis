@@ -15,7 +15,7 @@
 			public function __construct()
 			{
 				$config = Config::init();
-				parent::__construct($config->get('driver') . ':host=' . $config->get('dbhost') . ';dbname=' . $config->get('dbname'), $config->get('dbuser'), $config->get('dbpass'), array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+				parent::__construct($config->get('driver') . ':host=' . $config->get('host') . ';dbname=' . $config->get('database'), $config->get('username'), $config->get('password'), array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES " . $config->get('charset')));
 			}
 
 			public static function init()

@@ -8,7 +8,7 @@
 
 	if(!class_exists('ModelBase'))
 	{
-		abstract class ModelBase
+		class ModelBase
 		{
 			protected $db;
 			protected $table;
@@ -16,13 +16,13 @@
 
 			public function __construct($table)
 			{
-				$this->db       = SPDO::init();
+				$this->conn       = SPDO::init();
 				$this->table    = htmlentities($table);
 			}
 
 			public static function getKey()
 			{
-				// $result = $this->db->prepare('SELECT id{$table} FROM {$table} WHERE {$field} = {$id};');
+				// $result = $this->conn->prepare('SELECT id{$this->table} FROM {$this->table} WHERE {$field} = {$id};');
 				// $result->execute($values);
 
 				// return $result->fetchAll();
@@ -30,12 +30,12 @@
 
 			public function lastID()
 			{
-				return $this->db->lastInsertId();
+				return $this->conn->lastInsertId();
 			}
 
 			public static function query($query, $values = array())
 			{
-				$result = $this->db->prepare($query);
+				$result = $this->conn->prepare($query);
 				$result->execute($values);
 
 				return $result->fetchAll();
@@ -43,7 +43,7 @@
 
 			public static function executeOnly($query, $values = array())
 			{
-				$result = $this->db->prepare($query);
+				$result = $this->conn->prepare($query);
 				$result->execute($values);
 
 				return $result->rowCount();
@@ -52,8 +52,8 @@
 			public function select($where = array(), $last = "")
 			{
 				$table      = $this->table;
-				$query1     = "DESC {$table}";
-				$result1    = $this->db->query($query1);
+				$query1     = "DESC {$this->table}";
+				$result1    = $this->conn->query($query1);
 				$rows1      = $result1->fetchAll();
 				$str1       = "";
 
@@ -64,18 +64,18 @@
 				}
 
 				$str1       = (strlen($str1) > 0) ? substr($str1, 0, -5) : $str1;
-				$query2     = "SELECT * FROM {$table}" . ((strlen($str1) > 0) ? " WHERE {$str1}" : "") . " $last;";
-				$result2    = $this->db->prepare($query2);
-				$result2->execute($where);
+				$query2     = "SELECT * FROM {$this->table}" . ((strlen($str1) > 0) ? " WHERE {$str1}" : "") . " $last;";
+				$r    = $this->conn->prepare($query2);
+				$r->execute($where);
 
-				return $result2->fetchAll();
+				return $r->fetchAll();
 			}
 
 			public function count($where = array())
 			{
 				$table      = $this->table;
-				$query1     = "DESC {$table}";
-				$result1    = $this->db->query($query1);
+				$query1     = "DESC {$this->table}";
+				$result1    = $this->conn->query($query1);
 				$rows1      = $result1->fetchAll();
 				$str1       = "";
 
@@ -86,10 +86,10 @@
 				}
 
 				$str1       = (strlen($str1) > 0) ? substr($str1, 0, -5) : $str1;
-				$query2     = "SELECT COUNT(*) FROM {$table}" . ((strlen($str1) > 0) ? " WHERE {$str1}" : "") . ";";
-				$result2    = $this->db->prepare($query2);
-				$result2->execute($where);
-				$array      = $result2->fetchAll();
+				$query2     = "SELECT COUNT(*) FROM {$this->table}" . ((strlen($str1) > 0) ? " WHERE {$str1}" : "") . ";";
+				$r    = $this->conn->prepare($query2);
+				$r->execute($where);
+				$array      = $r->fetchAll();
 
 				return $array[0][0];
 			}
@@ -97,8 +97,8 @@
 			public function insert($values = array())
 			{
 				$table      = $this->table;
-				$query1     = "DESC {$table}";
-				$result1    = $this->db->query($query1);
+				$query1     = "DESC {$this->table}";
+				$result1    = $this->conn->query($query1);
 				$rows1      = $result1->fetchAll();
 				$params     = array ();
 				$tmp1       = "";
@@ -115,18 +115,18 @@
 				$str1   = (strlen($tmp1) > 0) ? substr($tmp1, 0, -2) : $tmp1;
 				$str2   = (strlen($tmp2) > 0) ? substr($tmp2, 0, -2) : $tmp2;
 
-				$query2     = "INSERT INTO {$table} ({$str1}) VALUES ({$str2});";
-				$result2    = $this->db->prepare($query2);
-				$result2->execute($params);
+				$query2     = "INSERT INTO {$this->table} ({$str1}) VALUES ({$str2});";
+				$r    = $this->conn->prepare($query2);
+				$r->execute($params);
 
-				return $result2->rowCount() > 0;
+				return $r->rowCount() > 0;
 			}
 
 			public function insertorupdate($values = array())
 			{
 				$table      = $this->table;
-				$query1     = "DESC {$table}";
-				$result1    = $this->db->query($query1);
+				$query1     = "DESC {$this->table}";
+				$result1    = $this->conn->query($query1);
 				$rows1      = $result1->fetchAll();
 				$params     = array ();
 				$tmp1       = "";
@@ -146,17 +146,17 @@
 				$str2 = (strlen($tmp2) > 0) ? substr($tmp2, 0, -2) : $tmp2;
 				$str3 = (strlen($tmp3) > 0) ? substr($tmp3, 0, -2) : $tmp3;
 
-				$query2     = "INSERT INTO {$table} ({$str1}) VALUES ({$str2}) ON DUPLICATE KEY UPDATE {$str3};";
-				$result2    = $this->db->prepare($query2);
-				$result2->execute($params);
-				return $result2->rowCount() > 0;
+				$query2     = "INSERT INTO {$this->table} ({$str1}) VALUES ({$str2}) ON DUPLICATE KEY UPDATE {$str3};";
+				$r    = $this->conn->prepare($query2);
+				$r->execute($params);
+				return $r->rowCount() > 0;
 			}
 
 			public function update($id, $values = array())
 			{
 				$table      = $this->table;
-				$query1     = "DESC {$table}";
-				$result1    = $this->db->query($query1);
+				$query1     = "DESC {$this->table}";
+				$result1    = $this->conn->query($query1);
 				$rows1      = $result1->fetchAll();
 				$params     = array ();
 				$str1       = "";
@@ -169,18 +169,18 @@
 				}
 
 				$str1       = (strlen($str1) > 0) ? substr($str1, 0, -2) : $str1;
-				$query2     = "UPDATE {$table} SET {$str1} WHERE id{$table} = {$id};";
-				$result2    = $this->db->prepare($query2);
-				$result2->execute($params);
+				$query2     = "UPDATE {$this->table} SET {$str1} WHERE id{$this->table} = {$id};";
+				$r    = $this->conn->prepare($query2);
+				$r->execute($params);
 
-				return $result2->fetchAll();
+				return $r->fetchAll();
 			}
 
 			public function updateAtNull($id, $values = array())
 			{
 				$table      = $this->table;
-				$query1     = "DESC {$table}";
-				$result1    = $this->db->query($query1);
+				$query1     = "DESC {$this->table}";
+				$result1    = $this->conn->query($query1);
 				$rows1      = $result1->fetchAll();
 				$params     = array ();
 				$str1       = "";
@@ -193,18 +193,18 @@
 				}
 
 				$str1       = (strlen($str1) > 0) ? substr($str1, 0, -2) : $str1;
-				$query2     = "UPDATE {$table} SET {$str1} WHERE id{$table} = {$id};";
-				$result2    = $this->db->prepare($query2);
-				$result2->execute($params);
+				$query2     = "UPDATE {$this->table} SET {$str1} WHERE id{$this->table} = {$id};";
+				$r    = $this->conn->prepare($query2);
+				$r->execute($params);
 
-				return $result2->fetchAll();
+				return $r->fetchAll();
 			}
 
 			public function updateWithOutCode($id, $values = array())
 			{
 				$table      = $this->table;
-				$query1     = "DESC {$table}";
-				$result1    = $this->db->query($query1);
+				$query1     = "DESC {$this->table}";
+				$result1    = $this->conn->query($query1);
 				$rows1      = $result1->fetchAll();
 				$params     = array ();
 				$str1       = "";
@@ -217,20 +217,18 @@
 				}
 
 				$str1       = (strlen($str1) > 0) ? substr($str1, 0, -2) : $str1;
-				$query2     = "UPDATE {$table} SET {$str1} WHERE id{$table} = {$id};";
-				$result2    = $this->db->prepare($query2);
-				$result2->execute($params);
+				$query2     = "UPDATE {$this->table} SET {$str1} WHERE id{$this->table} = {$id};";
+				$r    = $this->conn->prepare($query2);
+				$r->execute($params);
 
-				return $result2->fetchAll();
+				return $r->fetchAll();
 			}
 
 			public function updateWithNull($id, $values = array())
 			{
-				$table      = $this->table;
-				$query1     = "DESC {$table}";
-				$result1    = $this->db->query($query1);
-				$rows1      = $result1->fetchAll();
-				$params     = array ();
+				$r    		= $this->conn->query("DESC {$this->table}");
+				$rows1      = $r->fetchAll();
+				$params     = array();
 				$str1       = "";
 
 				foreach ($rows1 as $row1) {
@@ -244,38 +242,33 @@
 				}
 
 				$str1       = (strlen($str1) > 0) ? substr($str1, 0, -2) : $str1;
-				$query2     = "UPDATE {$table} SET {$str1} WHERE id{$table} = {$id};";
-				$result2    = $this->db->prepare($query2);
-				$result2->execute($params);
-
-				return $result2->fetchAll();
+				$r = $this->conn->prepare("UPDATE {$this->table} SET {$str1} WHERE id{$this->table} = {$id};");
+				$r->execute($params);
+				return $r->fetchAll();
 			}
 
 			public function delete($id)
 			{
-				$table      = $this->table;
-				$query2     = "DELETE FROM {$table} WHERE id{$table} = {$id};";
-				$result2    = $this->db->query($query2);
-
-				return $result2->fetchAll();
+				$r = $this->conn->query("DELETE FROM {$this->table} WHERE id{$this->table} = {$id};");
+				return $r->fetchAll();
 			}
 
 			public function reset()
 			{
-				$table      = $this->table;
-				$query2     = "TRUNCATE TABLE {$table}";
-				$result2    = $this->db->query($query2);
-
-				return $result2->fetchAll();
+				$r = $this->conn->query("TRUNCATE TABLE {$this->table}");
+				return $r->fetchAll();
 			}
 
 			public function deleteWhere($id, $field)
 			{
-				$table      = $this->table;
-				$query2     = "DELETE FROM {$table} WHERE {$field} = {$id};";
-				$result2    = $this->db->query($query2);
+				$r = $this->conn->query("DELETE FROM {$this->table} WHERE {$field} = {$id};");
+				return $r->fetchAll();
+			}
 
-				return $result2->fetchAll();
+			public function max($field)
+			{
+				$r = $this->conn->query('SELECT max("'.$field.'") as max FROM '.$this->table);
+				return Partial::arrayNames($r->fetchAll());
 			}
 		}
 	}

@@ -45,6 +45,11 @@
 						$config->setArray($db[strtolower($config->get('environment'))]);
 					}
 
+					// Init mirgations to database
+					$m = new Migrator();
+					$m->run();
+					exit();
+
 					$env 	= require_once 'config/environments/'. strtolower($config->get('environment')) . '.php';
 					if(!empty($env) && is_array($env)){
 						$config->setArray($env);
