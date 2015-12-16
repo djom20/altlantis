@@ -46,8 +46,8 @@
 					}
 
 					// Init mirgations to database
-					$m = new Migrator();
-					$m->run();
+					// $m = new Migrator();
+					// $m->rollback();
 
 					$env 	= require_once 'config/environments/'. strtolower($config->get('environment')) . '.php';
 					if(!empty($env) && is_array($env)){

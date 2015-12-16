@@ -53,8 +53,8 @@
 			 */
 			public function getLast()
 			{
-				// $query = $this->table()->where('batch', $this->getLastBatchNumber());
-				// return $query->orderBy('migration', 'desc')->get();
+				$select = array('batch' => $this->getLastBatchNumber());
+				return Partial::arrayNames($this->table()->select($select, " ORDER BY migration desc"));
 			}
 
 			/**
@@ -76,9 +76,9 @@
 			 * @param  \StdClass  $migration
 			 * @return void
 			 */
-			public function delete($migration)
+			public function delete($__id)
 			{
-				// $query = $this->table()->where('migration', $migration->migration)->delete();
+				$query = $this->table()->delete($__id);
 			}
 
 			/**
@@ -109,6 +109,7 @@
 			 */
 			public function createRepository()
 			{
+				//Deberia ser un new Builder
 				$query = "CREATE TABLE $this->table (
 					id int unsigned default null auto_increment,
 					migration varchar(50) not null,

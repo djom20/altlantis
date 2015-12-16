@@ -37,10 +37,10 @@
 					// Si no existe la base datos
 					$this->repository->createRepository();
 				}
+
 				$this->note("<info>Run migration</info>");
 
 				// Runner a mirgation
-				// require_once __DIR__.'/'.strtolower(__CLASS__).'.php';
 				$this->requireFiles($this->path);
 				$files 	= $this->getMigrationFiles($this->path);
 				$ran 	= $this->repository->getRan();
@@ -74,46 +74,32 @@
 			}
 
 			/**
-			 * Find path names matching a given pattern.
-			 *
-			 * @param  string  $pattern
-			 * @param  int     $flags
-			 * @return array
-			 */
-			public function glob($pattern, $flags = 0)
-			{
-				return glob($pattern, $flags);
-			}
-
-			/**
 			 * Run "down" a migration instance.
 			 *
 			 * @param  \StdClass  $migration
 			 * @param  bool  $pretend
 			 * @return void
 			 */
-			protected function runDown($migration, $pretend)
+			protected function runDown($migration)
 			{
-				// $file = $migration->migration;
+				if(!$this->repository->repositoryExists()){
+					return false;
+				}
+
+				$this->requireFiles($this->path);
+				$file = $migration->migration;
 
 				// First we will get the file name of the migration so we can resolve out an
 				// instance of the migration. Once we get an instance we can either run a
 				// pretend execution of the migration or we can run the real migration.
-				// $instance = $this->resolve($file);
-
-				// if ($pretend)
-				// {
-					// return $this->pretendToRun($instance, 'down');
-				// }
-
-				// $instance->down();
+				$instance = $this->resolve($file);
+				$instance->down();
 
 				// Once we have successfully run the migration "down" we will remove it from
 				// the migration repository so it will be considered to have not been run
 				// by the application then will be able to fire by any later operation.
-				// $this->repository->delete($migration);
-
-				// $this->note("<info>Rolled back:</info> $file");
+				$this->repository->delete($migration->id);
+				$this->note("<info>Rolled back:</info> $file");
 			}
 
 			/**
@@ -129,24 +115,21 @@
 				// We want to pull in the last batch of migrations that ran on the previous
 				// migration operation. We'll then reverse those migrations and run each
 				// of them "down" to reverse the last migration "operation" which ran.
-				// $migrations = $this->repository->getLast();
+				$migrations = $this->repository->getLast();
 
-				// if (count($migrations) == 0)
-				// {
-				// 	$this->note('<info>Nothing to rollback.</info>');
-
-				// 	return count($migrations);
-				// }
+				if (count($migrations) == 0){
+					$this->note('<info>Nothing to rollback.</info>');
+					return count($migrations);
+				}
 
 				// // We need to reverse these migrations so that they are "downed" in reverse
 				// // to what they run on "up". It lets us backtrack through the migrations
 				// // and properly reverse the entire database schema operation that ran.
-				// foreach ($migrations as $migration)
-				// {
-				// 	$this->runDown((object) $migration, $pretend);
-				// }
+				foreach ($migrations as $migration){
+					$this->runDown((object) $migration);
+				}
 
-				// return count($migrations);
+				return count($migrations);
 			}
 
 			/**
@@ -157,15 +140,14 @@
 			 */
 			public function getMigrationFiles($path)
 			{
-				$files = $this->glob($path.'/*_*.php');
+				$files = glob($path.'/*_*.php', 0);
 
 				// Once we have the array of files in the directory we will just remove the
 				// extension and take the basename of the file which is all we need when
 				// finding the migrations that haven't been run against the databases.
 				if ($files === false) return array();
 
-				$files = array_map(function($file)
-				{
+				$files = array_map(function($file){
 					return str_replace('.php', '', basename($file));
 
 				}, $files);

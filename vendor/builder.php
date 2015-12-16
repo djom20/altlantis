@@ -18,7 +18,7 @@
 
 			public function __construct($__table, $__callback){
 				$this->conn 	= SPDO::init();
-				$this->table 	= htmlentities($table);
+				$this->table 	= htmlentities($__table);
 				$this->querys 	= array();
 			}
 
@@ -31,7 +31,7 @@
 
 			public function _addTable($tableName){
 				// Almacenando el query para crear tablas
-				return $this->addSQL("CREATE TABLE {{ $tableName }} ( id{{ $tableName }} INT NOT NULL PRIMARY KEY AUTO_INCREMENT); ");
+				return $this->addSQL("CREATE TABLE $tableName ( id INT NOT NULL PRIMARY KEY AUTO_INCREMENT );");
 			}
 
 			public function createTable()
@@ -46,10 +46,10 @@
 				return true;
 			}
 
-			public function dropTable($tableName)
+			public function dropTable()
 			{
 				// Drop Table
-				return $this->addSQL("DROP TABLE {{ $tableName }}");
+				return $this->addSQL("DROP TABLE $this->table");
 			}
 
 			public function increments($column, $autoIncrement = false)
@@ -59,86 +59,86 @@
 
 			public function integer($column, $autoIncrement = false, $unsigned = false)
 			{
-				return $this->addSQL("ALTER TABLE {{ $this->table }} ADD {{ $column }} INT ".(($unsigned) ? 'UNSIGNED ' : null)."NOT NULL".(($autoIncrement) ? ' AUTO_INCREMENT' : null)."; ");
+				return $this->addSQL("ALTER TABLE $this->table ADD $column INT ".(($unsigned) ? 'UNSIGNED ' : null)."NOT NULL".(($autoIncrement) ? ' AUTO_INCREMENT' : null)."; ");
 			}
 
 			public function string($column, $length = 255)
 			{
-				return $this->addSQL("ALTER TABLE {{ $this->table }} ADD {{ $column }} VARCHAR( {{ $length }} ); ");
+				return $this->addSQL("ALTER TABLE $this->table ADD $column VARCHAR( $length ); ");
 			}
 
 			public function text($column, $length = 255)
 			{
 				// Almacenando el query para crear tablas
-				return $this->addSQL("ALTER TABLE {{ $this->table }} ADD {{ $column }} text; ");
+				return $this->addSQL("ALTER TABLE $this->table ADD $column text; ");
 			}
 
 			public function renameTable($oldTableName, $newTableName)
 			{
 				// Rename Table
-				return $this->addSQL("RENAME TABLE {{ $oldTableName }} TO {{ $newTableName }};");
+				return $this->addSQL("RENAME TABLE $oldTableName TO $newTableName;");
 			}
 
 			public function renameColumn($oldColumnName, $newColumnName)
 			{
 				// Rename Column
-				return $this->addSQL("ALTER TABLE {{ $this->table }} CHANGE {{ $oldColumnName }} {{ $newColumnName }} INT;");
+				return $this->addSQL("ALTER TABLE $this->table CHANGE $oldColumnName $newColumnName INT;");
 			}
 
 			public function decimal($column, $total, $decimal)
 			{
-				return $this->addSQL("ALTER TABLE {{ $this->table }} ADD {{ $column }} decimal({{ $total }}, {{ $decimal }}); ");
+				return $this->addSQL("ALTER TABLE $this->table ADD $column decimal($total, $decimal); ");
 			}
 
 			public function double($column, $total, $decimal)
 			{
-				return $this->addSQL("ALTER TABLE {{ $this->table }} ADD {{ $column }} decimal({{ $total }}, {{ $decimal }}); ");
+				return $this->addSQL("ALTER TABLE $this->table ADD $column decimal($total, $decimal); ");
 			}
 
 			public function float($column, $total, $decimal)
 			{
-				return $this->addSQL("ALTER TABLE {{ $this->table }} ADD {{ $column }} float({{ $total }}, {{ $decimal }}); ");
+				return $this->addSQL("ALTER TABLE $this->table ADD $column float($total, $decimal); ");
 			}
 
 			public function boolean($column)
 			{
-				return self::addSQL("ALTER TABLE {{ $this->table }} ADD {{ $column }} boolean; ");
+				return self::addSQL("ALTER TABLE $this->table ADD $column boolean; ");
 			}
 
 			public function enum($column)
 			{
-				return $this->addSQL("ALTER TABLE {{ $this->table }} ADD {{ $column }} ENUM(''); ");
+				return $this->addSQL("ALTER TABLE $this->table ADD $column ENUM(''); ");
 			}
 
 			public function date($column)
 			{
-				return $this->addSQL("ALTER TABLE {{ $this->table }} ADD {{ $column }} date; ");
+				return $this->addSQL("ALTER TABLE $this->table ADD $column date; ");
 			}
 
 			public function datetime($column)
 			{
-				return $this->addSQL("ALTER TABLE {{ $this->table }} ADD {{ $column }} datetime; ");
+				return $this->addSQL("ALTER TABLE $this->table ADD $column datetime; ");
 			}
 
 			public function time($column)
 			{
-				return $this->addSQL("ALTER TABLE {{ $this->table }} ADD {{ $column }} time; ");
+				return $this->addSQL("ALTER TABLE $this->table ADD $column time; ");
 			}
 
 			public function timestamp($column)
 			{
-				return $this->addSQL("ALTER TABLE {{ $this->table }} ADD {{ $column }} timestamp; ");
+				return $this->addSQL("ALTER TABLE $this->table ADD $column timestamp; ");
 			}
 
 			public function timestamps()
 			{
-				$this->addSQL("ALTER TABLE {{ $this->table }} ADD created_at timestamp; ");
-				return $this->addSQL("ALTER TABLE {{ $this->table }} ADD updated_at timestamp; ");
+				$this->addSQL("ALTER TABLE $this->table ADD created_at timestamp; ");
+				return $this->addSQL("ALTER TABLE $this->table ADD updated_at timestamp; ");
 			}
 
 			public function foreign($column)
 			{
-				$this->sql = "ALTER TABLE {{ $this->table }} ADD CONSTRAINT foreingkey_{{ $column }} FOREIGN KEY ({{ $columns }}) REFERENCES :foreignTable (:foreignColumn) ";
+				$this->sql = "ALTER TABLE $this->table ADD CONSTRAINT foreingkey_$column FOREIGN KEY ($columns) REFERENCES :foreignTable (:foreignColumn) ";
 				return $this;
 			}
 
@@ -160,17 +160,17 @@
 
 			public function primary($column)
 			{
-				return $this->addSQL("ALTER TABLE {{ $this->table }} ADD CONSTRAINT pk_{{ $column }} PRIMARY KEY ({{ $column }});");
+				return $this->addSQL("ALTER TABLE $this->table ADD CONSTRAINT pk_$column PRIMARY KEY ($column);");
 			}
 
 			public function primaryDrop()
 			{
-				return $this->addSQL("ALTER TABLE {{ $this->table }} DROP PRIMARY KEY;");
+				return $this->addSQL("ALTER TABLE $this->table DROP PRIMARY KEY;");
 			}
 
 			public function unique($column)
 			{
-				return $this->addSQL("ALTER TABLE {{ $this->table }} ADD UNIQUE ({{ $column }});");
+				return $this->addSQL("ALTER TABLE $this->table ADD UNIQUE ($column);");
 			}
 
 			public function uniqueDrop($column)
@@ -180,12 +180,12 @@
 
 			public function index($column)
 			{
-				return $this->addSQL("ALTER TABLE {{ $this->table }} ADD INDEX ({{ $column }});");
+				return $this->addSQL("ALTER TABLE $this->table ADD INDEX ($column);");
 			}
 
 			public function indexDrop($column)
 			{
-				return $this->addSQL("ALTER TABLE {{ $this->table }} DROP INDEX ({{ $column }});");
+				return $this->addSQL("ALTER TABLE $this->table DROP INDEX ($column);");
 			}
 
 			public function nullable()
@@ -195,18 +195,18 @@
 
 			public function tableExists($table)
 			{
-				$r = $this->conn->query("DESC {{ $table }};");
+				$r = $this->conn->query("DESC $table;");
 				return $r->fetchAll() > 0;
 			}
 
 			public function columnExists($table, $column)
 			{
-				$r = $this->conn->query("SELECT {{ $column }} FROM {{ $table }};");
+				$r = $this->conn->query("SELECT $column FROM $table;");
 				return $r->fetchAll() > 0;
 			}
 
 			public function build(){
-				// Accediendo a la base de datos y ejecutando el query
+				// Accediendo a la base de datos y ejecutando los query de la migracion
 				try {
 					foreach ($this->querys as $key => $sql) {
 						$this->conn->query($sql);

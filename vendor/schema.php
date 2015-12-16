@@ -20,6 +20,7 @@
 			 * @return \Illuminate\Database\Schema\Blueprint
 			 */
 			public function create($table, $callback){
+				echo $table.'<br>';
 				$builder = self::createBuilder($table);
 				$builder->createTable();
 				$callback($builder);
@@ -33,10 +34,9 @@
 			 * @param  string  $table
 			 * @return \Illuminate\Database\Schema\Blueprint
 			 */
-			public function drop($table, $callback){
+			public function drop($table){
 				$builder = self::createBuilder($table);
 				$builder->dropTable();
-				$callback($builder);
 				self::build($builder);
 				return true;
 			}

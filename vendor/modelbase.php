@@ -249,8 +249,8 @@
 
 			public function delete($id)
 			{
-				$r = $this->conn->query("DELETE FROM {$this->table} WHERE id{$this->table} = {$id};");
-				return $r->fetchAll();
+				$r = $this->conn->query("DELETE FROM {$this->table} WHERE id = {$id};");
+				return true;
 			}
 
 			public function reset()
@@ -267,7 +267,7 @@
 
 			public function max($field)
 			{
-				$r = $this->conn->query('SELECT max("'.$field.'") as max FROM '.$this->table);
+				$r = $this->conn->query('SELECT max('.$field.') as max FROM '.$this->table);
 				return Partial::arrayNames($r->fetchAll());
 			}
 		}
