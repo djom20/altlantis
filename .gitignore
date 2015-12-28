@@ -5,3 +5,4 @@ node_modules/
 *.json
 *.rar
 config/database.php
+composer.lock

@@ -10,11 +10,21 @@
 	{
 		class SPDO extends PDO
 		{
-			private static $instance = null;
+			private $config;
+			private $connName;
+			private $conections;
+			private static $instance;
 
 			public function __construct()
 			{
-				$config = Config::init();
+				$this->config = Config::init();
+
+				if(!empty($db) && is_array($db)){
+					$config->setArray($db[]);
+				}
+				$this->connName 	= strtolower($config->get('environment'));
+				$this->conections 	= $db[strtolower($config->get('environment'))];
+
 				parent::__construct($config->get('driver') . ':host=' . $config->get('host') . ';dbname=' . $config->get('database'), $config->get('username'), $config->get('password'), array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES " . $config->get('charset')));
 			}
 
@@ -25,6 +35,15 @@
 				}
 
 				return self::$instance;
+			}
+
+			public function setDefaultConnection(){
+				$db = require_once 'config/database.php';
+
+			}
+
+			public function getConectionName(){
+				return strtolower($this->config->get('environment'));
 			}
 		}
 	}

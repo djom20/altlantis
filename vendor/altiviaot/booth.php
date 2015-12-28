@@ -42,7 +42,7 @@
 
 					$db 	= require_once 'config/database.php';
 					if(!empty($db) && is_array($db)){
-						$config->setArray($db[strtolower($config->get('environment'))]);
+						$config->setArray($db);
 					}
 
 					// Init mirgations to database
