@@ -6,3 +6,5 @@ node_modules/
 *.rar
 config/database.php
 composer.lock
+!/vendor/altiviaot/*
+/vendor/*
