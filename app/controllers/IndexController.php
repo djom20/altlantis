@@ -15,6 +15,6 @@
 				'stylesheet' => 'resources/css/home/stylesheet_home.css'
 			);
 
-			$this->view->show('home/index', $_params);
+			View::make('home/index', $_params);
 		}
 	}

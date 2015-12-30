@@ -35,7 +35,6 @@
 				$this->post     = $post;
 				$this->files    = $files;
 				$this->delete   = $delete;
-				$this->view     = new View();
 			}
 
 			public function _Always(){}

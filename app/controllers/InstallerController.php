@@ -15,6 +15,6 @@
 				'stylesheet' => 'resources/css/installer/stylesheet_install.css'
 			);
 
-			$this->view->show('install/installer', $params);
+			View::make('install/installer', $params);
 		}
 	}

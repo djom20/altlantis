@@ -16,6 +16,6 @@
 				'migrations' 	=> null
 			);
 
-			$this->view->show('migrations/index', $params);
+			View::make('migrations/index', $params);
 		}
 	}
