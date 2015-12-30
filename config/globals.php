@@ -6,7 +6,10 @@
 		'viewsfolder' 		=> 'app/views/',
 		'templatesfolder' 	=> 'app/templates/',
 		'loggerfolder' 		=> 'storage/logs/',
+		'dirbase' 			=> '/home/altiviao/public_html/subdomains/atlantis/',
 		'template' 			=> 'default',
+		'language' 			=> 'EN', 	// Use standart
+		'maintenance' 		=> false, 	// Use true to shutdown server
 		'environment' 		=> 'development',
 		'debug' 			=> true,
 		'url' 				=> 'http://localhost',

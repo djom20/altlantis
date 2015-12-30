@@ -11,7 +11,7 @@
 	*
 	*/
 
-	namespace altiviaot\atlantis;
+	// namespace altiviaot\atlantis;
 
 	if(!class_exists('Migrator'))
 	{
@@ -33,9 +33,8 @@
 			/**
 			 * Run the outstanding migrations at a given path.
 			 *
-			 * @param  string  $path
-			 * @param  bool    $pretend
 			 * @return void
+			 *
 			 */
 			public function run()
 			{
@@ -70,7 +69,7 @@
 			/**
 			 * Convert a value to studly caps case.
 			 *
-			 * @param  string  $value
+			 * @param  string  $filename
 			 * @return string
 			 */
 			public function studly_case($filename)
@@ -83,7 +82,6 @@
 			 * Run "down" a migration instance.
 			 *
 			 * @param  \StdClass  $migration
-			 * @param  bool  $pretend
 			 * @return void
 			 */
 			protected function runDown($migration)

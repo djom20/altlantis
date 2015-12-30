@@ -11,7 +11,7 @@
 	*
 	*/
 
-	namespace altiviaot\atlantis;
+	// namespace altiviaot\atlantis;
 
 	if(!class_exists('MigrationRepository'))
 	{
@@ -26,7 +26,8 @@
 			/**
 			 * Create a new database migration repository instance.
 			 *
-			 * @param  \Illuminate\Database\ConnectionResolverInterface  $resolver
+			 * @param  Conexion $conn
+			 * @param  string  	$table
 			 * @return void
 			 */
 			public function __construct($conn, $table)

@@ -11,7 +11,7 @@
 	*
 	*/
 
-	namespace altiviaot\atlantis;
+	// namespace altiviaot\atlantis;
 
 	if(!class_exists('Schema'))
 	{
@@ -22,11 +22,10 @@
 			 * Create a new table on the schema.
 			 *
 			 * @param  string   $table
-			 * @param  Closure  $callback
-			 * @return \Illuminate\Database\Schema\Blueprint
+			 * @param  callback  $callback
+			 * @return bool
 			 */
 			public function create($table, $callback){
-				echo $table.'<br>';
 				$builder = self::createBuilder($table);
 				$builder->createTable();
 				$callback($builder);
@@ -38,7 +37,7 @@
 			 * Drop a table from the schema.
 			 *
 			 * @param  string  $table
-			 * @return \Illuminate\Database\Schema\Blueprint
+			 * @return bool
 			 */
 			public function drop($table){
 				$builder = self::createBuilder($table);
@@ -51,7 +50,7 @@
 			 * Drop a table from the schema if it exists.
 			 *
 			 * @param  string  $table
-			 * @return \Illuminate\Database\Schema\Blueprint
+			 * @return bool
 			 */
 			public function dropIfExists($table, $callback){
 				if(self::hasTable($table)){
@@ -69,8 +68,8 @@
 			 * Modify a table on the schema.
 			 *
 			 * @param  string   $table
-			 * @param  Closure  $callback
-			 * @return \Illuminate\Database\Schema\Blueprint
+			 * @param  callback  $callback
+			 * @return bool
 			 */
 			public function table($table, $callback){
 				self::build(self::createBuilder($table, $callback));
@@ -104,11 +103,11 @@
 			}
 
 			/**
-			 * Create a new command set with a Closure.
+			 * Create a new command set with a Builder.
 			 *
 			 * @param  string   $table
-			 * @param  Closure  $callback
-			 * @return \Illuminate\Database\Schema\Blueprint
+			 * @param  callback  $callback
+			 * @return Builder
 			 */
 			protected function createBuilder($table, $callback = null)
 			{
@@ -116,10 +115,10 @@
 			}
 
 			/**
-			 * Execute the blueprint to build / modify the table.
+			 * Execute the Builder to build / modify the table.
 			 *
-			 * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
-			 * @return void
+			 * @param  Builder  $Builder
+			 * @return bool
 			 */
 			protected function build(Builder $builder)
 			{

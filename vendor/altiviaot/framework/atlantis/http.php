@@ -10,7 +10,7 @@
 	*
 	*/
 
-	namespace altiviaot\atlantis;
+	// namespace altiviaot\atlantis;
 
 	if(!class_exists('HTTP'))
 	{
@@ -24,7 +24,8 @@
 				403 => '403 Forbidden',
 				404 => '404 Not Found',
 				424 => '424 Method Failure',
-				500 => '500 Internal Server Error'
+				500 => '500 Internal Server Error',
+				503 => '503 The server is Shutdown'
 			);
 
 			public static function JSON($value)

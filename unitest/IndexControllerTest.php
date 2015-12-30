@@ -3,7 +3,7 @@
 		IndexControllerTest Class
 	**/
 
-	class IndexControllerTest extends PHPUnit_Framework_TestCase
+	class IndexControllerTest extends \PHPUnit_Framework_TestCase
 	{
 		public function testArrayEmpty()
 		{

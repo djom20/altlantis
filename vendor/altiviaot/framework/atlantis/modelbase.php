@@ -10,7 +10,7 @@
 	*
 	*/
 
-	namespace altiviaot\atlantis;
+	// namespace altiviaot\atlantis;
 
 	if(!class_exists('ModelBase'))
 	{
@@ -22,8 +22,8 @@
 
 			public function __construct($table)
 			{
-				$this->conn       = SPDO::init();
-				$this->table    = htmlentities($table);
+				$this->conn  = SPDO::init();
+				$this->table = htmlentities($table);
 			}
 
 			public static function getKey()

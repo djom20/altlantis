@@ -10,16 +10,16 @@
 	*
 	*/
 
-	namespace altiviaot\atlantis;
+	// namespace altiviaot\atlantis;
 
 	if(!class_exists('View'))
 	{
 		class View
 		{
-			public function show($name, $_VARS = array())
+			public function make($name, $_vars = array())
 			{
 				$config     = Config::init();
-				$display    = new Display($name, $_VARS);
+				$display    = new Display($name, $_vars);
 				$_params	= $display->getParams();
 				$path       = $config->get('templatesfolder') . $config->get('template') . '.php';
 
@@ -31,8 +31,8 @@
 				include($path);
 			}
 
-			public function make($__view){
-				echo $__view;
-			}
+			// public function make($__view){
+			// 	echo $__view;
+			// }
 		}
 	}
