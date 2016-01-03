@@ -5,14 +5,20 @@
 	<link rel="shortcut icon" type="image/x-icon" href="https://dl.dropboxusercontent.com/u/57960869/Altiviaot/fav.ico">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="mobile-web-app-capable" content="yes">
+
+    <?php if($_params->is_webapp): ?>
+    	<meta name="mobile-web-app-capable" content="yes">
+    <?php endif; ?>
+
     <link rel="shortcut icon" sizes="196x196" href="https://dl.dropboxusercontent.com/u/57960869/Altiviaot/fav.ico">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+
     <!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 

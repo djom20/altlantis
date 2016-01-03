@@ -15,5 +15,6 @@
 		'url' 				=> 'http://localhost',
 		'timezone' 			=> 'UTC',
 		'locale' 			=> 'en',
-		'key' 				=>'COkfyMY9Ze6tPV4AhXS7vE5xpUeUDKnk'
+		'key' 				=> 'COkfyMY9Ze6tPV4AhXS7vE5xpUeUDKnk',
+		'web_app' 			=> false
 	);

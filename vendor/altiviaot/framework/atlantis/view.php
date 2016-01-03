@@ -20,8 +20,9 @@
 			{
 				$config     = Config::init();
 				$display    = new Display($name, $_vars);
-				$_params	= $display->getParams();
 				$path       = $config->get('templatesfolder') . $config->get('template') . '.php';
+				$_params	= $display->getParams();
+				$_params['is_webapp']	= $config->get('web_app');
 
 				if (file_exists($path) == false) {
 					trigger_error('View `' . $path . '` does not exist.', E_USER_NOTICE);

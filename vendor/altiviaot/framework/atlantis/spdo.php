@@ -19,6 +19,7 @@
 			private $config;
 			private $connName;
 			private $conections;
+			protected $conn;
 			private static $instance;
 
 			public function __construct()
@@ -31,7 +32,7 @@
 				$this->connName 	= strtolower($config->get('environment'));
 				$this->conections 	= $db[strtolower($config->get('environment'))];
 
-				parent::__construct($config->get('driver') . ':host=' . $config->get('host') . ';dbname=' . $config->get('database'), $config->get('username'), $config->get('password'), array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES " . $config->get('charset')));
+				$this->conn = parent::__construct($config->get('driver') . ':host=' . $config->get('host') . ';dbname=' . $config->get('database'), $config->get('username'), $config->get('password'), array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES " . $config->get('charset')));
 			}
 
 			public static function init()
@@ -43,9 +44,13 @@
 				return self::$instance;
 			}
 
+			public function getConection()
+			{
+				return $this->conn;
+			}
+
 			public function setDefaultConnection(){
 				$db = require_once 'config/database.php';
-
 			}
 
 			public function getConectionName(){
