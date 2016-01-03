@@ -20,6 +20,9 @@
 			{
 				$config = Config::init();
 
+				// Incluyendo helpers class
+				Files::requireOnce('app/helpers');
+
 				// Set TimeZone
 				date_default_timezone_set($config->get('timezone') ? $config->get('timezone') : 'UTC');
 
@@ -30,12 +33,10 @@
 				}
 
 				// Tester connection database
-				if(Data::is_contected())
-				{
-					echo 'Its coneccted';
-				}else{
-					echo 'Its no conected':
-				}
+				// if(Data::is_contected())
+				// {
+					// echo 'Its connected to database';
+				// }
 
 				// Init mirgations to database
 				// $m = new Migrator();
