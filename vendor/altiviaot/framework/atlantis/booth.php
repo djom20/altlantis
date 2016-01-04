@@ -21,22 +21,19 @@
 				$config = Config::init();
 
 				// Incluyendo helpers class
-				Files::requireOnce('app/helpers');
+				// Files::requireOnce('app/helpers');
+				// Files::requireOnce('config/routers');
 
 				// Set TimeZone
 				date_default_timezone_set($config->get('timezone') ? $config->get('timezone') : 'UTC');
 
-				$db = require_once 'config/database.php';
-				if(!empty($db) && is_array($db))
-				{
-					$config->setArray($db);
-				}
-
-				// Tester connection database
-				// if(Data::is_contected())
-				// {
-					// echo 'Its connected to database';
-				// }
+				// Files::loadConfig(array(
+				// 	'config/app',
+				// 	'config/database',
+				// 	'config/mail',
+				// 	'config/paths',
+				// 	'config/environments/'. ($config->get('environment') ? strtolower($config->get('environment')) : 'development')
+				// ));
 
 				// Init mirgations to database
 				// $m = new Migrator();
@@ -44,13 +41,6 @@
 
 				// Set config display errors
 				if ($config->get('environment') != 'test') ini_set('display_errors', 'Off');
-
-				// Set config environment by default
-				$env = require_once 'config/environments/'. $config->get('environment') ? strtolower($config->get('environment')) : 'development' . '.php';
-				if(!empty($env) && is_array($env))
-				{
-					$config->setArray($env);
-				}
 
 				//Formamos el nombre del Controlador o en su defecto, tomamos que es el IndexController
 				if(!empty($_GET['controller']))

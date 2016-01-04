@@ -10,113 +10,56 @@
 	*
 	*/
 
+	use Symfony\Component\HttpFoundation\Request;
+	use Symfony\Component\Routing\Matcher\UrlMatcher;
+	use Symfony\Component\Routing\RequestContext;
+	use Symfony\Component\Routing\RouteCollection;
+	use Symfony\Component\Routing\Route;
+
 	// namespace altiviaot\atlantis;
 
 	if(!class_exists('Router'))
 	{
 		class Router
 		{
-			/**
-			 * The route collection instance.
-			 *
-			 * @var Symfony\Component\Routing\RouteCollection
-			 */
 			protected $routes;
-			/**
-			 * The route filters.
-			 *
-			 * @var array
-			 */
-			protected $filters = array();
-			/**
-			 * The pattern to filter bindings.
-			 *
-			 * @var array
-			 */
-			protected $patternFilters = array();
-			/**
-			 * The global filters for the router.
-			 *
-			 * @var array
-			 */
-			protected $globalFilters = array();
-			/**
-			 * The stack of grouped attributes.
-			 *
-			 * @var array
-			 */
-			protected $groupStack = array();
-			/**
-			 * The inversion of control container instance.
-			 *
-			 * @var \Illuminate\Container\Container
-			 */
-			protected $container;
-			/**
-			 * The controller inspector instance.
-			 *
-			 * @var \Illuminate\Routing\Controllers\Inspector
-			 */
-			protected $inspector;
-			/**
-			 * The global parameter patterns.
-			 *
-			 * @var array
-			 */
-			protected $patterns = array();
-			/**
-			 * The registered route binders.
-			 *
-			 * @var array
-			 */
-			protected $binders = array();
-			/**
-			 * The current request being dispatched.
-			 *
-			 * @var Symfony\Component\HttpFoundation\Request
-			 */
-			protected $currentRequest;
-			/**
-			 * The current route being executed.
-			 *
-			 * @var \Illuminate\Routing\Route
-			 */
-			protected $currentRoute;
-			/**
-			 * Indicates if filters should be run.
-			 *
-			 * @var bool
-			 */
-			protected $runFilters = true;
-			/**
-			 * The default actions for a resourceful controller.
-			 *
-			 * @var array
-			 */
+			// protected $filters = array();
+			// protected $patternFilters = array();
+			// protected $globalFilters = array();
+			// protected $groupStack = array();
+			// protected $container;
+			// protected $inspector;
+			// protected $patterns = array();
+			// protected $binders = array();
+			// protected $currentRequest;
+			// protected $currentRoute;
+			// protected $runFilters = true;
 			protected $resourceDefaults = array('index', 'create', 'store', 'show', 'edit', 'update', 'destroy');
+
 			/**
 			 * Create a new router instance.
 			 *
-			 * @param  \Illuminate\Container\Container  $container
 			 * @return void
 			 */
-			public function __construct(Container $container = null)
+			public function __construct()
 			{
-				$this->container = $container;
+				echo __CLASS__.'::'.__FUNCTION__;
 				$this->routes = new RouteCollection();
-				$this->bind('_missing', function ($v) {
-					return explode('/', $v);
-				});
+				// $this->bind('_missing', function ($v) {
+				// 	return explode('/', $v);
+				// });
 			}
+
 			/**
 			 * Add a new route to the collection.
 			 *
 			 * @param  string  $pattern
 			 * @param  mixed   $action
-			 * @return \Illuminate\Routing\Route
+			 * @return Route
 			 */
 			public function get($pattern, $action)
 			{
+				echo __CLASS__.'::'.__FUNCTION__;
 				return $this->createRoute('get', $pattern, $action);
 			}
 			/**
@@ -124,7 +67,7 @@
 			 *
 			 * @param  string  $pattern
 			 * @param  mixed   $action
-			 * @return \Illuminate\Routing\Route
+			 * @return Route
 			 */
 			public function post($pattern, $action)
 			{
@@ -135,7 +78,7 @@
 			 *
 			 * @param  string  $pattern
 			 * @param  mixed   $action
-			 * @return \Illuminate\Routing\Route
+			 * @return Route
 			 */
 			public function put($pattern, $action)
 			{
@@ -146,7 +89,7 @@
 			 *
 			 * @param  string  $pattern
 			 * @param  mixed   $action
-			 * @return \Illuminate\Routing\Route
+			 * @return Route
 			 */
 			public function patch($pattern, $action)
 			{
@@ -157,7 +100,7 @@
 			 *
 			 * @param  string  $pattern
 			 * @param  mixed   $action
-			 * @return \Illuminate\Routing\Route
+			 * @return Route
 			 */
 			public function delete($pattern, $action)
 			{
@@ -168,7 +111,7 @@
 			 *
 			 * @param  string  $pattern
 			 * @param  mixed   $action
-			 * @return \Illuminate\Routing\Route
+			 * @return Route
 			 */
 			public function options($pattern, $action)
 			{
@@ -180,7 +123,7 @@
 			 * @param  string  $method
 			 * @param  string  $pattern
 			 * @param  mixed   $action
-			 * @return \Illuminate\Routing\Route
+			 * @return Route
 			 */
 			public function match($method, $pattern, $action)
 			{
@@ -191,7 +134,7 @@
 			 *
 			 * @param  string  $pattern
 			 * @param  mixed   $action
-			 * @return \Illuminate\Routing\Route
+			 * @return Route
 			 */
 			public function any($pattern, $action)
 			{
@@ -215,7 +158,7 @@
 			 * @param  string  $uri
 			 * @param  string  $controller
 			 * @param  array   $names
-			 * @return \Illuminate\Routing\Route
+			 * @return Route
 			 */
 			public function controller($uri, $controller, $names = array())
 			{
@@ -585,7 +528,7 @@
 			 * @param  string  $method
 			 * @param  string  $pattern
 			 * @param  mixed   $action
-			 * @return \Illuminate\Routing\Route
+			 * @return Route
 			 */
 			protected function createRoute($method, $pattern, $action)
 			{
@@ -627,17 +570,12 @@
 			/**
 			 * Parse the given route action into array form.
 			 *
-			 * @param  mixed  $action
+			 * @param  string  $action
 			 * @return array
 			 */
 			protected function parseAction($action)
 			{
-				// If the action is just a Closure we'll stick it in an array and just send
-				// it back out. However if it's a string we'll just assume it's meant to
-				// route into a controller action and change it to a controller array.
-				if ($action instanceof Closure) {
-					return array($action);
-				} elseif (is_string($action)) {
+				if (is_string($action)) {
 					return array('uses' => $action);
 				}
 				throw new \InvalidArgumentException('Unroutable action.');
@@ -712,39 +650,52 @@
 			 */
 			protected function setAttributes(Route $route, $action, $optional)
 			{
-				// // First we will set the requirement for the HTTP schemes. Some routes may
-				// // only respond to requests using the HTTPS scheme, while others might
-				// // respond to all, regardless of the scheme, so we'll set that here.
-				// if (in_array('https', $action)) {
-				// 	$route->setRequirement('_scheme', 'https');
-				// }
-				// if (in_array('http', $action)) {
-				// 	$route->setRequirement('_scheme', 'http');
-				// }
-				// // Once the scheme requirements have been made, we will set the before and
-				// // after middleware options, which will be used to run any middlewares
-				// // by the consuming library, making halting the request cycles easy.
-				// if (isset($action['before'])) {
-				// 	$route->setBeforeFilters($action['before']);
-				// }
-				// if (isset($action['after'])) {
-				// 	$route->setAfterFilters($action['after']);
-				// }
-				// // If there is a "uses" key on the route it means it is using a controller
-				// // instead of a Closures route. So, we'll need to set that as an option
-				// // on the route so we can easily do reverse routing ot the route URI.
-				// if (isset($action['uses'])) {
-				// 	$route->setOption('_uses', $action['uses']);
-				// }
-				// if (isset($action['domain'])) {
-				// 	$route->setHost($action['domain']);
-				// }
-				// // Finally we will go through and set all of the default variables to null
-				// // so the developer doesn't have to manually specify one each time they
-				// // are declared on a route. This is simply for developer convenience.
-				// foreach ($optional as $key) {
-				// 	$route->setDefault($key, null);
-				// }
+				// First we will set the requirement for the HTTP schemes. Some routes may
+				// only respond to requests using the HTTPS scheme, while others might
+				// respond to all, regardless of the scheme, so we'll set that here.
+				if (in_array('https', $action))
+				{
+					$route->setRequirement('_scheme', 'https');
+				}
+
+				if (in_array('http', $action))
+				{
+					$route->setRequirement('_scheme', 'http');
+				}
+
+				// Once the scheme requirements have been made, we will set the before and
+				// after middleware options, which will be used to run any middlewares
+				// by the consuming library, making halting the request cycles easy.
+				if (isset($action['before']))
+				{
+					$route->setBeforeFilters($action['before']);
+				}
+
+				if (isset($action['after']))
+				{
+					$route->setAfterFilters($action['after']);
+				}
+
+				// If there is a "uses" key on the route it means it is using a controller
+				// instead of a Closures route. So, we'll need to set that as an option
+				// on the route so we can easily do reverse routing ot the route URI.
+				if (isset($action['uses']))
+				{
+					$route->setOption('_uses', $action['uses']);
+				}
+
+				if (isset($action['domain']))
+				{
+					$route->setHost($action['domain']);
+				}
+
+				// Finally we will go through and set all of the default variables to null
+				// so the developer doesn't have to manually specify one each time they
+				// are declared on a route. This is simply for developer convenience.
+				foreach ($optional as $key)
+				{
+					$route->setDefault($key, null);
+				}
 			}
 			/**
 			 * Modify the pattern and extract optional parameters.
@@ -789,16 +740,20 @@
 			 */
 			protected function getCallback(array $action)
 			{
-				// foreach ($action as $key => $attribute) {
-				// 	// If the action has a "uses" key, the route is pointing to a controller
-				// 	// action instead of using a Closure. So, we'll create a Closure that
-				// 	// resolves the controller instances and calls the needed function.
-				// 	if ($key === 'uses') {
-				// 		return $this->createControllerCallback($attribute);
-				// 	} elseif ($attribute instanceof Closure) {
-				// 		return $attribute;
-				// 	}
-				// }
+				foreach ($action as $key => $attribute)
+				{
+					// If the action has a "uses" key, the route is pointing to a controller
+					// action instead of using a Closure. So, we'll create a Closure that
+					// resolves the controller instances and calls the needed function.
+					if ($key === 'uses')
+					{
+						return $this->createControllerCallback($attribute);
+					}
+					elseif ($attribute instanceof Closure)
+					{
+						return $attribute;
+					}
+				}
 			}
 			/**
 			 * Create the controller callback for a route.
@@ -853,7 +808,7 @@
 			 * Match the given request to a route object.
 			 *
 			 * @param  \Symfony\Component\HttpFoundation\Request  $request
-			 * @return \Illuminate\Routing\Route
+			 * @return Route
 			 */
 			protected function findRoute(Request $request)
 			{
@@ -1289,7 +1244,7 @@
 			/**
 			 * Get the current route being executed.
 			 *
-			 * @return \Illuminate\Routing\Route
+			 * @return Route
 			 */
 			public function getCurrentRoute()
 			{

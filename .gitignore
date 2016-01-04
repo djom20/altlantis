@@ -7,4 +7,5 @@ node_modules/
 config/database.php
 composer.lock
 !/vendor/altiviaot/*
+!/vendor/composer/autoload_classmap.php
 /vendor/*

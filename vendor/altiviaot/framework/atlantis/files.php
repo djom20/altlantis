@@ -26,5 +26,21 @@
 					require_once( $file );
 				}
 			}
+
+			public static function loadConfig($route = array())
+			{
+				print_r($route);
+				exit();
+
+				$c = Config::init();
+				foreach ($route as $k => $r) {
+					$p = glob( $r . '.php' );
+					$v = require_once $p;
+					if(!empty($v) && is_array($v))
+					{
+						$c->setArray($db);
+					}
+				}
+			}
 		}
 	}

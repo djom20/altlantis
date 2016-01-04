@@ -1,6 +1,6 @@
 <?php
 	// Configurations mailers
-	$config->setArray(array(
+	return array(
 		'driver' 		=> 'smtp'
 		'host' 			=> 'smtp.mailgun.org',
 		'port' 			=> 587,
@@ -9,4 +9,4 @@
 		'username' 		=> null,
 		'password' 		=> null,
 		'sendmail' 		=> '/usr/sbin/sendmail -bs'
-	));
+	);
