@@ -27,18 +27,28 @@
 				}
 			}
 
-			public static function loadConfig($route = array())
+			public static function chargeConfig($route = array())
 			{
-				print_r($route);
-				exit();
-
 				$c = Config::init();
 				foreach ($route as $k => $r) {
-					$p = glob( $r . '.php' );
-					$v = require_once $p;
+					$v = require_once($r. '.php');
 					if(!empty($v) && is_array($v))
 					{
-						$c->setArray($db);
+						$c->setArray($v);
+					}
+				}
+			}
+
+			public static function chargeLang($__locale = null)
+			{
+				$c = Config::init();
+
+				$f = glob($c->get('dir_lang') . ((is_null($__locale)) ? $c->get('locale') : $__locale) . '/*.php');
+				foreach ($f as $k => $r) {
+					$v = require_once($r);
+					if(!empty($v) && is_array($v))
+					{
+						$c->setArray(array('lang' => $v));
 					}
 				}
 			}

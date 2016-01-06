@@ -41,6 +41,11 @@
 				}
 			}
 
+			public function getArray()
+			{
+				return $this->vars;
+			}
+
 			public static function init()
 			{
 				if (!isset(self::$instance)) {

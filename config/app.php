@@ -5,7 +5,7 @@
 		'url' 				=> 'http://localhost',
 		'timezone' 			=> 'UTC',
 		'key' 				=> 'COkfyMY9Ze6tPV4AhXS7vE5xpUeUDKnk',
-		'web_app' 			=> false
+		'web_app' 			=> true,
 		'locale' 			=> 'en',
 		'environment' 		=> 'development',
 		'template' 			=> 'default',

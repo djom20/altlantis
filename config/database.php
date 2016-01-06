@@ -3,7 +3,7 @@
 		'default' 		=> 'mysql',
 		'migrations' 	=> 'migrations',
 		'development'  	=> array(
-			'fetch'		=> PDO::FETCH_CLASS
+			'fetch'		=> PDO::FETCH_CLASS,
 			'driver'   	=> 'mysql',
 			'host'     	=> 'localhost',
 			'database' 	=> 'altiviao_atlantis',
@@ -14,7 +14,7 @@
 			'schema'   	=> 'public'
 		),
 		'test' 		   	=> array(
-			'fetch' 	=> PDO::FETCH_CLASS
+			'fetch' 	=> PDO::FETCH_CLASS,
 			'driver'   	=> 'postgresql',
 			'host'     	=> 'localhost',
 			'database' 	=> 'altiviao_atlantis',
@@ -25,7 +25,7 @@
 			'schema'   	=> 'public'
 		),
 		'production'   	=> array(
-			'fetch' 	=> PDO::FETCH_CLASS
+			'fetch' 	=> PDO::FETCH_CLASS,
 			'driver'   	=> 'oracle',
 			'host'     	=> 'localhost',
 			'database' 	=> 'altiviao_atlantis',

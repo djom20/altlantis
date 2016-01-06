@@ -22,7 +22,10 @@
 				$display    = new Display($name, $_vars);
 				$path       = $config->get('templatesfolder') . $config->get('template') . '.php';
 				$_params	= $display->getParams();
-				$_params['is_webapp']	= $config->get('web_app');
+
+				$_params	= (array)$_params;
+				$_params['is_webapp'] = $config->get('web_app');
+				$_params	= (object)$_params;
 
 				if (file_exists($path) == false) {
 					trigger_error('View `' . $path . '` does not exist.', E_USER_NOTICE);

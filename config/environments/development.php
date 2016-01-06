@@ -1,2 +1,2 @@
 <?php
-	return array('urlbase', 'localhost');
+	return array('urlbase' => 'localhost');

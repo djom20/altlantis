@@ -1,7 +1,7 @@
 <?php
 	// Configurations mailers
 	return array(
-		'driver' 		=> 'smtp'
+		'driver' 		=> 'smtp',
 		'host' 			=> 'smtp.mailgun.org',
 		'port' 			=> 587,
 		'from' 			=> array('address' => null, 'name' => null),

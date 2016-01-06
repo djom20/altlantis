@@ -1,5 +1,5 @@
 *.zip
-cache/
+cache/*
 *.sftp
 node_modules/
 *.json
@@ -9,3 +9,27 @@ composer.lock
 !/vendor/altiviaot/*
 !/vendor/composer/autoload_classmap.php
 /vendor/*
+
+# -- Composer -----------------------------------------
+composer.phar
+
+# -- PHPUnit ------------------------------------------
+app/phpunit.xml
+
+# -- Editores -----------------------------------------
+# sublimetext
+/*.sublime-project
+*.sublime-workspace
+
+# -- Sistemas Operativos ------------------------------
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+.*
+!.gitignore
+!.htaccess
+*~

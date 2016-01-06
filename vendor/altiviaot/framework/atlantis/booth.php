@@ -21,23 +21,15 @@
 				$config = Config::init();
 
 				// Incluyendo helpers class
-				// Files::requireOnce('app/helpers');
-				// Files::requireOnce('config/routers');
+				Files::requireOnce('app/helpers');
+				Files::requireOnce('config/routers');
 
 				// Set TimeZone
 				date_default_timezone_set($config->get('timezone') ? $config->get('timezone') : 'UTC');
 
-				// Files::loadConfig(array(
-				// 	'config/app',
-				// 	'config/database',
-				// 	'config/mail',
-				// 	'config/paths',
-				// 	'config/environments/'. ($config->get('environment') ? strtolower($config->get('environment')) : 'development')
-				// ));
-
 				// Init mirgations to database
-				// $m = new Migrator();
-				// $m->rollback();
+				//$m = new Migrator();
+				//$m->rollback();
 
 				// Set config display errors
 				if ($config->get('environment') != 'test') ini_set('display_errors', 'Off');
