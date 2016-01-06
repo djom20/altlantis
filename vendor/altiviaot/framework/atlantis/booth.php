@@ -16,10 +16,8 @@
 	{
 		class Booth
 		{
-			public static function run()
+			public static function run(Config $config)
 			{
-				$config = Config::init();
-
 				// Incluyendo helpers class
 				Files::requireOnce('app/helpers');
 				Files::requireOnce('config/routers');
@@ -90,7 +88,7 @@
 					$_GET = $get;
 				}
 
-				$controllerPath = $config->get('controllersfolder') . $controllerName . '.php';
+				$controllerPath = $config->get('dir_controllers') . $controllerName . '.php';
 				//Incluimos el fichero que contiene nuestra clase controladora solicitada
 				if (is_file($controllerPath))
 				{
@@ -98,8 +96,12 @@
 				} else {
 					//Si el controlador anterior no existe, llamamos al controlador de Error
 					$controllerName = 'ErrorController';
-					$controllerPath = $config->get('controllersfolder') . $controllerName . '.php';
+					$controllerPath = $config->get('dir_controllers') . $controllerName . '.php';
 					$actionName = 'index';
+					echo '</pre>';
+					print_r($config->getArray());
+					echo '</pre>'; exit();
+					echo $config->get('dir_controllers'); exit();
 					require $controllerPath;
 				}
 
@@ -107,7 +109,7 @@
 				if (!method_exists($controllerName, $actionName))
 				{
 					$controllerName = 'ErrorController';
-					$controllerPath = $config->get('controllersfolder') . $controllerName . '.php';
+					$controllerPath = $config->get('dir_controllers') . $controllerName . '.php';
 					$actionName = 'index';
 					require $controllerPath;
 				}

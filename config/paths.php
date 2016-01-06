@@ -3,10 +3,10 @@
 
 	// Paths general
 	return array(
-		'controllersfolder' => $base . '/app/controllers/',
-		'modelsfolder' 		=> $base . '/app/models/',
-		'viewsfolder' 		=> $base . '/app/views/',
-		'templatesfolder' 	=> $base . '/app/templates/',
-		'loggerfolder' 		=> $base . '/storage/logs/',
-		'dirbase' 			=> $base . '/'
+		'dir_controllers' 	=> $base . '/app/controllers/',
+		'dir_models' 		=> $base . '/app/models/',
+		'dir_views' 		=> $base . '/app/views/',
+		'dir_templates' 	=> $base . '/app/templates/',
+		'dir_logger' 		=> $base . '/storage/logs/',
+		'dir_base' 			=> $base . '/'
 	);

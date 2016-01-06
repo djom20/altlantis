@@ -32,7 +32,7 @@
 			public function show()
 			{
 				$config = Config::init();
-				$path = $config->get('viewsfolder') . $this->name . '.php';
+				$path = $config->get('dir_views') . $this->name . '.php';
 
 				if (file_exists($path) == false) {
 					trigger_error('View `' . $path . '` does not exist.', E_USER_NOTICE);

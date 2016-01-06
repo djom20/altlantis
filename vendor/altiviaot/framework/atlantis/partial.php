@@ -19,7 +19,7 @@
 			public static function show($name, $_VARS = array())
 			{
 				$config = Config::init();
-				$path = $config->get('viewsFolder') . $name;
+				$path = $config->get('dir_views') . $name;
 
 				if (file_exists($path) == false) {
 					trigger_error('Template `' . $path . '` does not exist.', E_USER_NOTICE);

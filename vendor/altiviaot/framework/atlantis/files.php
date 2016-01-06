@@ -27,30 +27,38 @@
 				}
 			}
 
-			public static function chargeConfig($route = array())
+			public function chargeConfig($route = array())
 			{
 				$c = Config::init();
 				foreach ($route as $k => $r) {
-					$v = require_once($r. '.php');
+					if(file_exists($r .'.php')) $v = require_once($r. '.php');
+					else throw new InvalidArgumentException('Unroutable file '.$r);
+
 					if(!empty($v) && is_array($v))
 					{
 						$c->setArray($v);
 					}
 				}
+
+				return $c->getArray();
 			}
 
-			public static function chargeLang($__locale = null)
+			public function chargeLang($__locale = null)
 			{
 				$c = Config::init();
 
 				$f = glob($c->get('dir_lang') . ((is_null($__locale)) ? $c->get('locale') : $__locale) . '/*.php');
 				foreach ($f as $k => $r) {
-					$v = require_once($r);
+					if(file_exists($r)) $v = require_once($r);
+					else throw new InvalidArgumentException('Unroutable file '.$r);
+
 					if(!empty($v) && is_array($v))
 					{
 						$c->setArray(array('lang' => $v));
 					}
 				}
+
+				return $c->getArray();
 			}
 		}
 	}

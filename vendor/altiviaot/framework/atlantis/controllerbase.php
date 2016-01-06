@@ -43,7 +43,7 @@
 			{
 				$modelName  = ucwords($model) . 'Model';
 				$strmodel   = strtolower($model);
-				$modelPath  = $this->config->get('modelsfolder') . $modelName . '.php';
+				$modelPath  = $this->config->get('dir_models') . $modelName . '.php';
 				if (is_file($modelPath)) {
 					require $modelPath;
 					$modelObj = new $modelName($strmodel);

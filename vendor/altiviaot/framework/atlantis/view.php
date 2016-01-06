@@ -20,7 +20,7 @@
 			{
 				$config     = Config::init();
 				$display    = new Display($name, $_vars);
-				$path       = $config->get('templatesfolder') . $config->get('template') . '.php';
+				$path       = $config->get('dir_templates') . $config->get('template') . '.php';
 				$_params	= $display->getParams();
 
 				$_params	= (array)$_params;
