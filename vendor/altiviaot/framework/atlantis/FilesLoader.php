@@ -1,7 +1,7 @@
 <?php
 
 	/**
-	  Files Class
+	  FilesLoader Class
 	*
 	* @author Ing. Jonathan Olier djom202@gmail.com
 	* @version 1.0
@@ -13,9 +13,9 @@
 
 	// namespace altiviaot\atlantis;
 
-	if(!class_exists('Files'))
+	if(!class_exists('FilesLoader'))
 	{
-		abstract class Files
+		abstract class FilesLoader
 		{
 			private function __construct(){}
 

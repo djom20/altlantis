@@ -19,8 +19,8 @@
 			public static function run(Config $config)
 			{
 				// Incluyendo helpers class
-				Files::requireOnce('app/helpers');
-				Files::requireOnce('config/routers');
+				FilesLoader::requireOnce('app/helpers');
+				FilesLoader::requireOnce('config/routers');
 
 				// Set TimeZone
 				date_default_timezone_set($config->get('timezone') ? $config->get('timezone') : 'UTC');
