@@ -187,7 +187,7 @@
 
 			private function requireFiles($path){
 				$this->note("<info>Importando los archivos de migraciones</info>");
-				Files::requireOnce($path);
+				FilesLoader::requireOnce($path);
 			}
 
 			/**
