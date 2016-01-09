@@ -10,7 +10,7 @@
 	*
 	*/
 
-	// namespace Atlantis;
+	// namespace Framework;
 
 	if(!class_exists('Auth'))
 	{

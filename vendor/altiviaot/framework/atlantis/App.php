@@ -10,21 +10,23 @@
 	*
 	*/
 
-	// namespace Atlantis;
+	// namespace Framework;
 
 	if(!class_exists('App'))
 	{
 		class App
 		{
-			const version 	= '1.0.0'; // The Atlantis framework version.
-			private $config = null;
-			private $name 	= null;
-			private $log 	= null;
+			const version 		= '1.0.0'; // The Atlantis framework version.
+			private $config 	= null;
+			private $name 		= null;
+			private $log 		= null;
+			private $console	= null;
 			private static $instance;
 
 			public function __construct()
 			{
-				$this->config = Config::init();
+				$this->config 	= Config::init();
+				$this->console 	= Console::
 
 				$this->config->setArray(FilesLoader::chargeConfig(array(
 					'config/globals',

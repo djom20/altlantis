@@ -5,7 +5,15 @@
 $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
-return array(
+// Auto reading Class
+$n = array();
+foreach (glob($vendorDir . '/altiviaot/framework/atlantis/*.php') as $k => $v) {
+    $t = current(explode('.', end(explode('/', $v))));
+    $dir = $vendorDir . "/altiviaot/framework/atlantis";
+    $n["{$t}"] = "{$dir}/{$t}.php";
+}
+
+return array_merge(array(
     'File_Iterator' => $vendorDir . '/phpunit/php-file-iterator/src/Iterator.php',
     'File_Iterator_Facade' => $vendorDir . '/phpunit/php-file-iterator/src/Facade.php',
     'File_Iterator_Factory' => $vendorDir . '/phpunit/php-file-iterator/src/Factory.php',
@@ -353,40 +361,5 @@ return array(
     'PHP_Token_YIELD' => $vendorDir . '/phpunit/php-token-stream/PHP/Token.php',
     'SessionHandlerInterface' => $vendorDir . '/symfony/http-foundation/Symfony/Component/HttpFoundation/Resources/stubs/SessionHandlerInterface.php',
     'Symfony\\Component\\HttpFoundation\\Resources\\stubs\\FakeFile' => $vendorDir . '/symfony/http-foundation/Symfony/Component/HttpFoundation/Resources/stubs/FakeFile.php',
-    'Text_Template' => $vendorDir . '/phpunit/php-text-template/src/Template.php',
-
-     // Atlantis Repo
-    'Aes' => $vendorDir . '/altiviaot/framework/atlantis/Aes.php',
-    'App' => $vendorDir . '/altiviaot/framework/atlantis/App.php',
-    'Auth' => $vendorDir . '/altiviaot/framework/atlantis/Auth.php',
-    'Booth' => $vendorDir . '/altiviaot/framework/atlantis/Booth.php',
-    'Builder' => $vendorDir . '/altiviaot/framework/atlantis/Builder.php',
-    'Cached' => $vendorDir . '/altiviaot/framework/atlantis/Cached.php',
-    'Commander' => $vendorDir . '/altiviaot/framework/atlantis/Commander.php',
-    'Config' => $vendorDir . '/altiviaot/framework/atlantis/Config.php',
-    'Console' => $vendorDir . '/altiviaot/framework/atlantis/Console.php',
-    'ControllerBase' => $vendorDir . '/altiviaot/framework/atlantis/ControllerBase.php',
-    'Cookie' => $vendorDir . '/altiviaot/framework/atlantis/Cookie.php',
-    'Data' => $vendorDir . '/altiviaot/framework/atlantis/Data.php',
-    'Display' => $vendorDir . '/altiviaot/framework/atlantis/Display.php',
-    'FilesLoader' => $vendorDir . '/altiviaot/framework/atlantis/FilesLoader.php',
-    'Http' => $vendorDir . '/altiviaot/framework/atlantis/Http.php',
-    'Input' => $vendorDir . '/altiviaot/framework/atlantis/Input.php',
-    'Installer' => $vendorDir . '/altiviaot/framework/atlantis/Installer.php',
-    'Lang' => $vendorDir . '/altiviaot/framework/atlantis/Lang.php',
-    'Logs' => $vendorDir . '/altiviaot/framework/atlantis/Logs.php',
-    'Mailer' => $vendorDir . '/altiviaot/framework/atlantis/Mailer.php',
-    'MigrationRepository' => $vendorDir . '/altiviaot/framework/atlantis/MigrationRepository.php',
-    'Migrator' => $vendorDir . '/altiviaot/framework/atlantis/Migrator.php',
-    'Minitester' => $vendorDir . '/altiviaot/framework/atlantis/Minitester.php',
-    'Modelbase' => $vendorDir . '/altiviaot/framework/atlantis/Modelbase.php',
-    'Partial' => $vendorDir . '/altiviaot/framework/atlantis/Partial.php',
-    'QueryFactory' => $vendorDir . '/altiviaot/framework/atlantis/QueryFactory.php',
-    'Router' => $vendorDir . '/altiviaot/framework/atlantis/Router.php',
-    'RouterColletions' => $vendorDir . '/altiviaot/framework/atlantis/RouterColletions.php',
-    'Rowobject' => $vendorDir . '/altiviaot/framework/atlantis/Rowobject.php',
-    'Schema' => $vendorDir . '/altiviaot/framework/atlantis/Schema.php',
-    'Spdo' => $vendorDir . '/altiviaot/framework/atlantis/Spdo.php',
-    'Support' => $vendorDir . '/altiviaot/framework/atlantis/Support.php',
-    'View' => $vendorDir . '/altiviaot/framework/atlantis/View.php'
-);
+    'Text_Template' => $vendorDir . '/phpunit/php-text-template/src/Template.php'
+), $n);

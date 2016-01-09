@@ -1,0 +1,14 @@
+#!/usr/bin/env php
+<?php
+// application.php
+
+require __DIR__.'/vendor/autoload.php';
+
+use Console;
+use Symfony\Component\Console\Application;
+
+$lemuria = new Application();
+$lemuria->add(new Console());
+$status = $lemuria->run();
+
+exit($status);

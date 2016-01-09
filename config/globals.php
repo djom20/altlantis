@@ -2,7 +2,7 @@
 	// Configurations generals
 	return array(
 		'debug' 			=> true,
-		'url' 				=> 'http://localhost',
+		'url' 				=> 'http://localhost:8086/',
 		'timezone' 			=> 'UTC',
 		'key' 				=> 'COkfyMY9Ze6tPV4AhXS7vE5xpUeUDKnk',
 		'web_app' 			=> true,
