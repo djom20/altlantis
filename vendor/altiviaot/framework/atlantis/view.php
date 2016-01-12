@@ -10,7 +10,7 @@
 	*
 	*/
 
-	// namespace altiviaot\atlantis;
+	// namespace Framework;
 
 	if(!class_exists('View'))
 	{
@@ -18,14 +18,19 @@
 		{
 			public function make($name, $_vars = array())
 			{
-				$config     = Config::init();
 				$display    = new Display($name, $_vars);
-				$path       = $config->get('dir_templates') . $config->get('template') . '.php';
 				$_params	= $display->getParams();
 
-				$_params	= (array)$_params;
-				$_params['is_webapp'] = $config->get('web_app');
-				$_params	= (object)$_params;
+				try {
+					$config     = Config::init();
+					$path       = $config->get('dir_templates') . $config->get('template') . '.php';
+
+					$_params	= (array)$_params;
+					$_params['is_webapp'] = $config->get('web_app');
+					$_params	= (object)$_params;
+				} catch (Exception $e) {
+					$path       = $config->get('dir_templates') . $config->get('template') . '.php';
+				}
 
 				if (file_exists($path) == false) {
 					trigger_error('View `' . $path . '` does not exist.', E_USER_NOTICE);

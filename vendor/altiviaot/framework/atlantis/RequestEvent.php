@@ -16,7 +16,7 @@
 
 	if(!class_exists('RequestEvent'))
 	{
-		class RequestEvent
+		class RequestEvent extends Event
 		{
 			protected $request;
 

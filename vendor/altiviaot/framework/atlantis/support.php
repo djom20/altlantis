@@ -10,7 +10,7 @@
 	*
 	*/
 
-	// namespace altiviaot\atlantis;
+	// namespace Framework;
 
 	if ( ! function_exists('app'))
 	{

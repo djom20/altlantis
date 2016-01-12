@@ -58,7 +58,7 @@
 					unset($attributes['callback']);
 					$response = call_user_func_array($callback, $attributes);
 				} catch (ResourceNotFoundException $e) {
-					$response = new Response('Not found!', 404);
+					$response = new Response('Error, Route Not found!', 404);
 				}
 
 				return $response;

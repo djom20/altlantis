@@ -5,15 +5,7 @@
 $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
-// Auto reading Class
-$n = array();
-foreach (glob($vendorDir . '/altiviaot/framework/atlantis/*.php') as $k => $v) {
-    $t = current(explode('.', end(explode('/', $v))));
-    $dir = $vendorDir . "/altiviaot/framework/atlantis";
-    $n["{$t}"] = "{$dir}/{$t}.php";
-}
-
-return array_merge(array(
+return array(
     'File_Iterator' => $vendorDir . '/phpunit/php-file-iterator/src/Iterator.php',
     'File_Iterator_Facade' => $vendorDir . '/phpunit/php-file-iterator/src/Facade.php',
     'File_Iterator_Factory' => $vendorDir . '/phpunit/php-file-iterator/src/Factory.php',
@@ -360,6 +352,5 @@ return array_merge(array(
     'PHP_Token_XOR_EQUAL' => $vendorDir . '/phpunit/php-token-stream/PHP/Token.php',
     'PHP_Token_YIELD' => $vendorDir . '/phpunit/php-token-stream/PHP/Token.php',
     'SessionHandlerInterface' => $vendorDir . '/symfony/http-foundation/Symfony/Component/HttpFoundation/Resources/stubs/SessionHandlerInterface.php',
-    'Symfony\\Component\\HttpFoundation\\Resources\\stubs\\FakeFile' => $vendorDir . '/symfony/http-foundation/Symfony/Component/HttpFoundation/Resources/stubs/FakeFile.php',
-    'Text_Template' => $vendorDir . '/phpunit/php-text-template/src/Template.php'
-), $n);
+    'Text_Template' => $vendorDir . '/phpunit/php-text-template/src/Template.php',
+);

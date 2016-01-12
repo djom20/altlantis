@@ -16,7 +16,7 @@
 	use Symfony\Component\Routing\RouteCollection;
 	use Symfony\Component\Routing\Route;
 
-	// namespace altiviaot\atlantis;
+	// namespace Framework;
 
 	if(!class_exists('Router'))
 	{

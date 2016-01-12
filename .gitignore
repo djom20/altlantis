@@ -3,6 +3,7 @@ cache/*
 *.sftp
 node_modules/
 *.json
+*.back
 *.rar
 config/database.php
 composer.lock
