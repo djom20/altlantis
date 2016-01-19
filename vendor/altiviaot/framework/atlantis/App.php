@@ -12,6 +12,9 @@
 
 	// namespace Framework;
 
+	use Symfony\Component\HttpFoundation\Request;
+    use Symfony\Component\HttpFoundation\Response;
+
 	if(!class_exists('App'))
 	{
 		class App
@@ -21,12 +24,16 @@
 			private $name 		= null;
 			private $log 		= null;
 			private $console	= null;
+			private $request	= null;
+			// private $router		= null;
 			private static $instance;
 
 			public function __construct()
 			{
 				$this->config 	= Config::init();
-				$this->console 	= Console::
+				$this->request  = Request::createFromGlobals();
+				$this->router   = Router::init();
+				// $this->console 	= Console::
 
 				$this->config->setArray(FilesLoader::chargeConfig(array(
 					'config/globals',
@@ -52,6 +59,8 @@
 					'name_param_lang' => ':attribute'
 				));
 
+				if (file_exists($path = $this->config->get('dir_config') .'routers.php')){ include $path; }
+
 				$this->listDependencies();
 
 				// Load lenguage to default
@@ -67,7 +76,8 @@
 				// echo '</pre>'; exit();
 			}
 
-			public function init(){
+			public function init()
+			{
 				if (!isset(self::$instance)) {
 					$c = __CLASS__;
 					self::$instance = new $c;
@@ -121,8 +131,16 @@
 				$this->config->set('version', version);
 				$this->config->set('app_name', $this->name);
 
-				Logs::debuger('Mensaje');
-				Booth::run($this->config); // Booth this App
+				try {
+					Logs::debuger('Mensaje');
+
+					$this->response = Router::handle($this->request);
+    				$this->response->send();
+
+					// Booth::run($this->config); // Booth this App
+				} catch (Exception $e) {
+
+				}
 			}
 		}
 	}

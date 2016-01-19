@@ -10,6 +10,7 @@ composer.lock
 !/vendor/altiviaot/*
 !/vendor/composer/autoload_classmap.php
 /vendor/*
+error_log
 
 # -- Composer -----------------------------------------
 composer.phar
